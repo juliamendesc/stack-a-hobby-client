@@ -1,28 +1,24 @@
-<<<<<<< HEAD
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import CoursesList from './components/courses/CoursesList';
-=======
-import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Login from './components/projects/auth/Login';
-import Signup from './components/projects/auth/Signup';
-import AuthService from './components/projects/auth/auth-service';
+import Login from './components/courses/auth/Login';
+import Signup from './components/courses/auth/Signup';
+import AuthService from './components/courses/auth/auth-service';
 import Navbar from './components/Navbar';
->>>>>>> ad5d29a409e5a3dad13efd93fe0097d0d697399a
 
 
 class App extends Component {
   state={
-    loggedinUser:null
+    loggedInUser:null
   }
   service = new AuthService();
 
 setCurrentUser = (userObj) =>{
   this.setState({
-    loggedinUser:userObj
+    loggedInUser:userObj
   })
 }
 

@@ -22,7 +22,7 @@ class Login extends Component {
         .then(response =>{
             this.props.setCurrentUser(response);
             this.setState({username:'', password:''});
-            // this.props.history.push('/projects');
+            this.props.history.push('/courses');
         })
     }
 
