@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import AuthService from "./courses/auth/auth-service";
+import AuthService from "./auth/auth-service";
+import Button from 'react-bootstrap/Button';
 
 class Navbar extends Component {
   service = new AuthService();
 
   logoutUser = () => {
-    this.service.logout().then(() => {
-      this.props.setCurrentUser(null);
-    });
-  };
+      this.service.logout()
+          .then(() => {
+              this.props.setCurrentUser(null);
+              localStorage.clear();
+          })
+  }
 
   render() {
     if (this.props.loggedInUser) {
@@ -17,14 +20,11 @@ class Navbar extends Component {
         <nav>
           <ul>
             <li>Welcome {this.props.loggedInUser.username}</li>
-            <li>
-              <Link to="/courses">Courses</Link>
-            </li>
-            <li>
+              <Link to="/courses"><Button variant="link">Courses</Button></Link>
+              <Link to="/about"> <Button variant="link">About</Button></Link>
               <Link to="/">
-                <button onClick={this.logoutUser}>Logout</button>
+              <Button variant="link" onClick={() => this.logoutUser()}>Logout</Button>
               </Link>
-            </li>
           </ul>
         </nav>
       );
@@ -32,12 +32,9 @@ class Navbar extends Component {
       return (
         <nav>
           <ul>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
+            <Link to="/about"> <Button variant="link">About</Button></Link>
+            <Link to="/login"><Button variant="link">Login</Button></Link>
+            <Link to="/signup"><Button variant="dark">Signup</Button></Link>
           </ul>
         </nav>
       );

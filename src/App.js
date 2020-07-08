@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Login from "./components/courses/auth/Login";
-import Signup from "./components/courses/auth/Signup";
-import AuthService from "./components/courses/auth/auth-service";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
+import AuthService from "./components/auth/auth-service";
 import CoursesList from "./components/courses/CoursesList";
 import Navbar from "./components/Navbar";
 import CourseDetails from "./components/courses/CourseDetails";
 import EditCourse from "./components/courses/EditCourse";
+import About from './components/About.js';
 
 class App extends Component {
   state = {
@@ -40,7 +41,6 @@ class App extends Component {
           setCurrentUser={this.setCurrentUser}
           loggedInUser={this.state.loggedInUser}
         />
-        <CoursesList />
         <Switch>
           <Route
             exact
@@ -83,6 +83,13 @@ class App extends Component {
                 return <Redirect to="/login" />;
               }
             }}
+          />
+          <Route
+            exact
+            path="/about"
+            render={(props) => (
+              <About setCurrentUser={this.setCurrentUser} {...props} />
+            )}
           />
         </Switch>
       </div>
