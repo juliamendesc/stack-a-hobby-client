@@ -22,7 +22,9 @@ class AuthService {
       })
       .then((response) => {
         return response.data;
+        
       });
+
   };
 
   loggedin = () => {

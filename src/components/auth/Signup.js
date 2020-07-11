@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
 
 class Signup extends Component {
   state = {
@@ -37,6 +38,7 @@ class Signup extends Component {
         this.props.history.push("/courses")
       })
       .catch((error) => console.log(error));
+      toast(this.error)
   };
 
   handleChange = (event) => {
@@ -140,6 +142,7 @@ class Signup extends Component {
           Already have account?
           <Link to={"/login"}> Login</Link>
         </p>
+        <ToastContainer />
       </div>
     );
   }

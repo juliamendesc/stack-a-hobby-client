@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
 
 class Login extends Component {
   state = {
@@ -25,16 +26,16 @@ class Login extends Component {
       this.setState({ username: "", password: "" });
       localStorage.setItem("loggedin", true);
       this.props.history.push("/");
+    }).catch(error =>{
+      console.log(error)
+      toast(error)
     });
   };
 
   render() {
     return (
       <div>
-        <Form
-          onSubmit={this.handleFormSubmit}
-          style={{ width: "80%", margin: "10px auto" }}
-        >
+          <Form onSubmit={this.handleFormSubmit} style={{width:"80%", margin:"10px auto"}}>
           <Row form>
             <Col
               style={{ width: "80%", margin: "10px auto" }}
@@ -79,6 +80,7 @@ class Login extends Component {
           Don't have account?
           <Link to={"/signup"}> Signup</Link>
         </p>
+        <ToastContainer />
       </div>
     );
   }
