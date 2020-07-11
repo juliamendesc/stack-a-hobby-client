@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar";
 import CourseDetails from "./components/courses/CourseDetails";
 import EditCourse from "./components/courses/EditCourse";
 import About from './components/About.js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   state = {
@@ -24,6 +26,7 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchUser();
+    
   }
 
   fetchUser = () => {
@@ -52,6 +55,7 @@ class App extends Component {
             path="/login"
             render={(props) => (
               <Login setCurrentUser={this.setCurrentUser} {...props} />
+              
             )}
           />
           <Route
@@ -97,6 +101,7 @@ class App extends Component {
             )}
           />
         </Switch>
+        <ToastContainer />
       </div>
     );
   }
