@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class Login extends Component {
   state = {
@@ -21,7 +21,7 @@ class Login extends Component {
     this.service.login(username, password).then((response) => {
       console.log("loggedin", response);
       this.props.setCurrentUser(response);
-     
+
       this.setState({ username: "", password: "" });
       localStorage.setItem("loggedin", true);
       this.props.history.push("/");
@@ -31,38 +31,49 @@ class Login extends Component {
   render() {
     return (
       <div>
-
-          <Form onSubmit={this.handleFormSubmit} style={{width:"80%", margin:"10px auto"}}>
+        <Form
+          onSubmit={this.handleFormSubmit}
+          style={{ width: "80%", margin: "10px auto" }}
+        >
           <Row form>
-            <Col style={{width:"80%", margin:"10px auto"}} sm={6} md={{ size: 3, offset: 4 }}>
-              <FormGroup >
-          <Label>Username:</Label>
-          <Input
-            type="text"
-            name="username"
-            placeholder="Your Username"
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
+            <Col
+              style={{ width: "80%", margin: "10px auto" }}
+              sm={6}
+              md={{ size: 3, offset: 4 }}
+            >
+              <FormGroup>
+                <Label>Username:</Label>
+                <Input
+                  type="text"
+                  name="username"
+                  placeholder="Your Username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
               </FormGroup>
             </Col>
-            </Row>
-            <Row form>
-            <Col style={{width:"80%", margin:"10px auto"}} sm={6} md={{ size: 3, offset: 4 }}>
-            <FormGroup>
-          <Label>Password:</Label>
-          <Input
-            name="password"
-            placeholder="Your Password"
-            type="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-
-          </FormGroup>
-          </Col>
-       </Row>
-       <Button color= "primary" type="submit" value="Login">Login </Button>
+          </Row>
+          <Row form>
+            <Col
+              style={{ width: "80%", margin: "10px auto" }}
+              sm={6}
+              md={{ size: 3, offset: 4 }}
+            >
+              <FormGroup>
+                <Label>Password:</Label>
+                <Input
+                  name="password"
+                  placeholder="Your Password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Button color="primary" type="submit" value="Login">
+            Login{" "}
+          </Button>
         </Form>
         <p>
           Don't have account?

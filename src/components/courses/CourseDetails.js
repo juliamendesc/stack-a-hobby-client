@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ReactPlayer from 'react-player/youtube';
+import ResponsivePlayer from './ResponsivePlayer';
+import './CourseDetails.css';
 
 class CourseDetails extends Component {
   state = {};
@@ -10,13 +13,7 @@ class CourseDetails extends Component {
     axios
       .get(`https://stack-a-hobby.herokuapp.com/api/courses/${params.id}`)
       .then((responseFromAPI) => {
-        const course = responseFromAPI.data;
-        // 1. Option one
-        // this.setState({
-        //     title: course.title,
-        //     description: course.description
-        // })
-        // 2. Option two (when the response is equal to the state)
+        const course = responseFromAPI.data
         this.setState(course);
       });
   };
@@ -33,7 +30,6 @@ class CourseDetails extends Component {
   };
   componentDidMount() {
     this.getSingleCourse();
-    this.deleteCourse();
   }
 
   render() {
@@ -43,8 +39,8 @@ class CourseDetails extends Component {
         <div>
           <div>
             <h1>{this.state.title}</h1>
-            <p>{this.state.description}</p>
-
+            <p>{this.state.description}
+            <ReactPlayer className="course-video" url={this.state.videoURL}/></p>
             {this.props.loggedInUser && (
               <div>
                 <button onClick={() => this.deleteCourse()}>

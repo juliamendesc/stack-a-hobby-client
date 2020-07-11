@@ -5,7 +5,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import AuthService from "./components/auth/auth-service";
 import CoursesList from "./components/courses/CoursesList";
-import Navbar from "./components/Navbar";
+import Topbar from "./components/Topbar";
 import CourseDetails from "./components/courses/CourseDetails";
 import EditCourse from "./components/courses/EditCourse";
 import About from './components/About.js';
@@ -42,7 +42,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar
+        <Topbar
           setCurrentUser={this.setCurrentUser}
           loggedInUser={this.state.loggedInUser}
         />

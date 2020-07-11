@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ReactPlayer from 'react-player/youtube';
 
 class CoursesList extends Component {
   state = {
@@ -25,7 +26,7 @@ class CoursesList extends Component {
           {this.state.listOfCourses.map((course) => {
             return (
               <div key={course._id}>
-                {/* go to /projects/123456 */}
+
                 <Link to={`/courses/${course._id}`}>
                   <h3>{course.title}</h3>
                 </Link>
