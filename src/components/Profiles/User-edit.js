@@ -26,7 +26,7 @@ class StudentProfile extends Component {
         const { params } = this.props.match;
         axios.put(`http://localhost:5000/api/projects/${params.id}`, { title, description} )
             .then(() => {
-                this.props.history.push('/projects');
+                this.props.history.push('/courses');
             });
     }
 
