@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
+import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class Login extends Component {
   state = {
@@ -30,22 +31,39 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Username:</label>
-          <input
+
+          <Form onSubmit={this.handleFormSubmit} style={{width:"80%", margin:"10px auto"}}>
+          <Row form>
+            <Col style={{width:"80%", margin:"10px auto"}} sm={6} md={{ size: 3, offset: 4 }}>
+              <FormGroup >
+          <Label>Username:</Label>
+          <Input
             type="text"
             name="username"
+            placeholder="Your Username"
             value={this.state.username}
             onChange={this.handleChange}
           />
-          <label>Password:</label>
-          <input
+              </FormGroup>
+            </Col>
+            </Row>
+            <Row form>
+            <Col style={{width:"80%", margin:"10px auto"}} sm={6} md={{ size: 3, offset: 4 }}>
+            <FormGroup>
+          <Label>Password:</Label>
+          <Input
             name="password"
+            placeholder="Your Password"
+            type="password"
             value={this.state.password}
             onChange={this.handleChange}
           />
-          <input type="submit" value="Login" />
-        </form>
+
+          </FormGroup>
+          </Col>
+       </Row>
+       <Button color= "primary" type="submit" value="Login">Login </Button>
+        </Form>
         <p>
           Don't have account?
           <Link to={"/signup"}> Signup</Link>
