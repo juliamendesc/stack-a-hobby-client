@@ -33,7 +33,7 @@ class Signup extends Component {
           lastName: "",
         });
         this.props.setCurrentUser(response);
-        // this.props.history.push("/projects")
+        this.props.history.push("/courses")
       })
       .catch((error) => console.log(error));
   };

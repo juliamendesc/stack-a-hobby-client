@@ -8,7 +8,7 @@ class CourseDetails extends Component {
   getSingleCourse = () => {
     const { params } = this.props.match;
     axios
-      .get(`http://localhost:5000/api/courses/${params.id}`)
+      .get(`https://stack-a-hobby.herokuapp.com/api/courses/${params.id}`)
       .then((responseFromAPI) => {
         const course = responseFromAPI.data;
         // 1. Option one
@@ -23,7 +23,7 @@ class CourseDetails extends Component {
   deleteCourse = () => {
     const { params } = this.props.match;
     axios
-      .delete(`http://localhost:5000/api/courses/${params.id}`)
+      .delete(`https://stack-a-hobby.herokuapp.com/api/courses/${params.id}`)
       .then(() => {
         this.props.history.push("/courses");
       })
@@ -33,6 +33,7 @@ class CourseDetails extends Component {
   };
   componentDidMount() {
     this.getSingleCourse();
+    this.deleteCourse();
   }
 
   render() {

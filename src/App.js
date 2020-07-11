@@ -18,23 +18,28 @@ class App extends Component {
 
   setCurrentUser = (userObj) => {
     this.setState({
-      loggedinUser: userObj,
+      loggedInUser: userObj,
     });
   };
 
-  fetchUser = () => {
-    if (this.state.loggedInUser === null) {
-      this.service.loggedin().then((response) => {
-        if (response._id) {
-          this.setState({
-            loggedInUser: response,
-          });
-        }
-      });
-    }
-  };
-  render() {
+  componentDidMount() {
     this.fetchUser();
+  }
+
+  fetchUser = () => {
+    if(this.state.loggedInUser === null) {
+      this.service.loggedin() 
+        .then(response => {
+          if (response._id) {
+            this.setCurrentUser(response);
+          } else {
+            localStorage.clear();
+          }
+        })
+    }
+  }
+
+  render() {
     return (
       <div className="App">
         <Navbar

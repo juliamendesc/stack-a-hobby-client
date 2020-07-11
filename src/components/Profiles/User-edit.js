@@ -24,7 +24,7 @@ class StudentProfile extends Component {
         event.preventDefault();
         const { email, dateOfBirth, firstName,lastName } = this.state;
         const { params } = this.props.match;
-        axios.put(`http://localhost:5000/api/projects/${params.id}`, { title, description} )
+        axios.put(`https://stack-a-hobby.herokuapp.com/api/courses/${params.id}`, { title, description} )
             .then(() => {
                 this.props.history.push('/projects');
             });

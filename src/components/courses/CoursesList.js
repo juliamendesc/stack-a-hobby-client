@@ -8,7 +8,7 @@ class CoursesList extends Component {
   };
 
   getAllCourses = () => {
-    axios.get("http://localhost:5000/api/courses").then((responseFromAPI) => {
+    axios.get("https://stack-a-hobby.herokuapp.com/api/courses").then((responseFromAPI) => {
       this.setState({
         listOfCourses: responseFromAPI.data,
       });

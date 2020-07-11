@@ -17,7 +17,7 @@ class EditCourse extends Component {
     const { title, description } = this.state;
     const { params } = this.props.match;
     axios
-      .put(`http://localhost:5000/api/courses/${params.id}`, {
+      .put(`https://stack-a-hobby.herokuapp.com/api/courses/${params.id}`, {
         title,
         description,
       })

@@ -18,8 +18,11 @@ class Login extends Component {
     event.preventDefault();
     const { username, password } = this.state;
     this.service.login(username, password).then((response) => {
+      console.log("loggedin", response);
       this.props.setCurrentUser(response);
+     
       this.setState({ username: "", password: "" });
+      localStorage.setItem("loggedin", true);
       this.props.history.push("/");
     });
   };
