@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import AuthService from "./components/auth/auth-service";
@@ -9,8 +11,7 @@ import Topbar from "./components/Topbar";
 import CourseDetails from "./components/courses/CourseDetails";
 import EditCourse from "./components/courses/EditCourse";
 import About from './components/About.js';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import UserDetails from './components/Profiles/User-details';
 
 class App extends Component {
   state = {
@@ -26,7 +27,6 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchUser();
-    
   }
 
   fetchUser = () => {
@@ -67,6 +67,14 @@ class App extends Component {
           />
           <Route
             exact
+            path="/userdetails"
+            render={(props) => (
+              <UserDetails setCurrentUser={this.setCurrentUser} {...props} />
+              
+            )}
+          />
+          <Route
+            exact
             path="/courses"
             render={(props) => (
               <CoursesList setCurrentUser={this.setCurrentUser} {...props} />
@@ -101,7 +109,7 @@ class App extends Component {
             )}
           />
         </Switch>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AddImage from './components/images/AddImage.js';
 
 class StudentProfile extends Component {
     state = {
@@ -8,7 +9,6 @@ class StudentProfile extends Component {
         firstName: this.props.location.state.firstName,
         lastName: this.props.location.state.lastName,
     }
-
 
     componentDidMount() {
         //Make call to the API
@@ -39,6 +39,7 @@ class StudentProfile extends Component {
                     <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
                     <label>Description</label>
                     <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
+                    <AddImage />
                     <input type="submit" value="submit" />
                  </form>
             </div>
