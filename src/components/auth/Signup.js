@@ -3,6 +3,8 @@ import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
+
 
 class Signup extends Component {
   state = {
@@ -12,6 +14,10 @@ class Signup extends Component {
     dateOfBirth: "",
     firstName: "",
     lastName: "",
+    imageUrl: "",
+    name: "",
+    description: "",
+    file: "",
   };
   service = new AuthService();
 
@@ -23,8 +29,14 @@ class Signup extends Component {
     const dateOfBirth = this.state.dateOfBirth;
     const firstName = this.state.firstName;
     const lastName = this.state.lastName;
+    const imageUrl = this.state.imageUrl;
+    const name = this.state.name;
+    const description = this.state.description;
+    const file = this.state.file;
+
+    
     this.service
-      .signup(username, password, email, dateOfBirth, firstName, lastName)
+      .signup(username, password, email, dateOfBirth, firstName, lastName, imageUrl, name, description, file)
       .then((response) => {
         this.setState({
           username: "",
@@ -33,18 +45,50 @@ class Signup extends Component {
           dateOfBirth: "",
           firstName: "",
           lastName: "",
+          imageUrl:"",
+          name: "",
+          description:"",
+          file:"",
         });
         this.props.setCurrentUser(response);
         this.props.history.push("/courses")
       })
-      .catch((error) => console.log(error));
-      toast(this.error)
+      .catch(error =>{
+        toast(`${error}`)
+      })
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
+
+//Upload photos Change - Axios as well - HUGO
+  handleFileChange = (event) => {
+    this.setState({ file: event.target.files[0]});
+}
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", this.state.file);
+    axios.post('https://stack-a-hobby.herokuapp.com/api//upload', uploadData)
+        .then((response) => {
+            console.log('image uploaded', response);
+            
+            axios.post('https://stack-a-hobby.herokuapp.com/api//images/create', {
+              name: this.state.name,
+              description: this.state.description,
+              imageUrl: response.data.imageUrl
+            })
+            .then((response) => {
+                console.log('image created', response);
+                this.setState({ name: '', description: '', file: '', feedbackMessage: 'Image uploaded sucessfully'});
+            })
+        })
+}  
+
+
   render() {
     return (
       <div>
@@ -135,6 +179,25 @@ class Signup extends Component {
               </FormGroup>
             </Col>
           </Row>
+
+          <Row form>
+            <Col sm="12" md={{ size: 6, offset: 3 }}>
+              <FormGroup>
+              <Label>Profile Image</Label>
+          {/* <Input
+            type="file"
+            name="imageurl"
+            value={this.state.imageUrl}
+            onChange={this.handleChange}
+            
+          /> */}
+                      <Col sm="12" md={{ size: 6, offset: 3 }}>
+     <Input type="file" onChange={this.handleFileChange && this.handleSubmit}  /> 
+     </Col>
+              </FormGroup>
+            </Col>
+          </Row>
+
           <Button color="primary" type="submit" value="Signup" >Signup</Button>
 
         </Form>

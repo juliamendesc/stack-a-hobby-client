@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import AuthService from "./components/auth/auth-service";

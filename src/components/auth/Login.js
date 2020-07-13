@@ -27,8 +27,7 @@ class Login extends Component {
       localStorage.setItem("loggedin", true);
       this.props.history.push("/");
     }).catch(error =>{
-      console.log(error)
-      toast(error)
+      toast(`${error}`)
     });
   };
 

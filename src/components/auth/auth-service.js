@@ -20,11 +20,10 @@ class AuthService {
         firstName,
         lastName,
       })
-      .then((response) => {
-        return response.data;
-        
+      .then((response) => response.data)
+      .catch((error) => {
+        return Promise.reject(error.response.data.message);
       });
-
   };
 
   loggedin = () => {
@@ -43,6 +42,9 @@ class AuthService {
     return this.service
       .post('/login', { username, password })
       .then((response) => response.data)
+      .catch((error) => {
+        return Promise.reject(error.response.data.message);
+      });
   };
 }
 

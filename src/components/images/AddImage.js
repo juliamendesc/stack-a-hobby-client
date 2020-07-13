@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Col, Row, Button, Form, FormGroup, Label, Input, } from 'reactstrap';
  
 // import the service file since we need it to send (and get) the data to(from) server
 import axios from 'axios';
@@ -43,23 +44,32 @@ class AddImage extends Component {
     render() {
         return (
           <div>
-            <h2>New Image</h2>
-            <form onSubmit={this.handleSubmit}>
-                <label>Name</label>
-                <input 
+            <h4>Upload New Image</h4>
+            <Form onSubmit={this.handleSubmit}>
+            <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <Label>Name</Label>
+                <Input 
                     type="text" 
                     name="name" 
                     value={ this.state.name } 
                     onChange={this.handleChange} />
-                <label>Description</label>
-                <textarea 
-                    type="text" 
+                </Col>
+
+         <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <Label>Description</Label>
+                <Input 
+                    type="textarea" 
                     name="description" 
                     value={ this.state.description } 
                     onChange={this.handleChange} />
-                <input type="file" onChange={this.handleFileChange} /> 
-                <button type="submit">Save new image</button>
-            </form>
+                 <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <Input type="file" onChange={this.handleFileChange} /> 
+                </Col>
+                </Col>
+                <Col sm="12" md={{ size: 6, offset: 3 }}>
+                <Button type="submit">Save new image</Button>
+                </Col>
+            </Form>
             <div>{this.state.feedbackMessage}</div>
           </div>
         );

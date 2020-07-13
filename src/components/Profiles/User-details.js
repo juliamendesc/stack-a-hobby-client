@@ -8,11 +8,14 @@ import Col from 'react-bootstrap/Col'
 import { Link } from "react-router-dom";
 // import './About.css';
 import AddImage from '../images/AddImage.js';
+// import StudentProfile from './User-edit'
 
 
 function UserDetails(props) {
   return (
       <div>
+
+      {/* <StudentProfile /> */}
       <AddImage />
 
     <Container>

@@ -49,3 +49,4 @@ class StudentProfile extends Component {
 }
 
 export default StudentProfile;
+
