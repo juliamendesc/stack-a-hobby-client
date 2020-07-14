@@ -18,13 +18,7 @@ class Signup extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const username = this.state.username;
-    const password = this.state.password;
-    const email = this.state.email;
-    const dateOfBirth = this.state.dateOfBirth;
-    const firstName = this.state.firstName;
-    const lastName = this.state.lastName;
-    const file = this.state.file;
+    const { username, password, email, dateOfBirth, firstName, lastName, file } = this.state;
 
     const uploadData = new FormData();
     uploadData.append("imageUrl", file);
@@ -86,6 +80,7 @@ class Signup extends Component {
               <Label>Password:</Label>
                 <Input
                   name="password"
+                  type="password"
                   value={this.state.password}
                   placeholder='Password'
                   onChange={this.handleChange}
@@ -153,15 +148,8 @@ class Signup extends Component {
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <FormGroup>
               <Label>Profile Image</Label>
-                  {/* <Input
-                    type="file"
-                    name="imageurl"
-                    value={this.state.imageUrl}
-                    onChange={this.handleChange}
-                    
-                  /> */}
                 <Col sm="12" md={{ size: 6, offset: 3 }}>
-                  <Input type="file" value={this.state.imageUrl} onChange={this.handleFileChange}  /> 
+                  <Input type="file" onChange={this.handleFileChange}  /> 
                 </Col>
               </FormGroup>
             </Col>

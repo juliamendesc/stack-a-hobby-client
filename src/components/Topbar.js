@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import "./Topbar.css";
 import AuthService from "./auth/auth-service";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import "./Topbar.css";
 
 class Topbar extends Component {
   service = new AuthService();
@@ -38,7 +37,7 @@ class Topbar extends Component {
               </Form>
             </Nav>
             <Nav className="justify-content-end">
-              <Nav.Link href="/userdetails">
+              <Nav.Link href="/user-details">
                 Welcome {this.props.loggedInUser.username}
               </Nav.Link>
               <Nav.Link onClick={() => this.logoutUser()}>Logout</Nav.Link>

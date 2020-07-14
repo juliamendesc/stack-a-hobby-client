@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ReactPlayer from 'react-player/youtube';
-import ResponsivePlayer from './ResponsivePlayer';
+// import ResponsivePlayer from './ResponsivePlayer';
 import './CourseDetails.css';
+
 
 class CourseDetails extends Component {
   state = {};

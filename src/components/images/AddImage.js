@@ -5,12 +5,7 @@ import { Col, Row, Button, Form, FormGroup, Label, Input, } from 'reactstrap';
 import axios from 'axios';
  
 class AddImage extends Component {
-    state = {
-        name: "",
-        description: "",
-        file: "",
-        feedbackMessage: ""
-    };
+    state = {};
     
     handleChange = (event) => {  
         const { name, value } = event.target;
@@ -46,29 +41,16 @@ class AddImage extends Component {
           <div>
             <h4>Upload New Image</h4>
             <Form onSubmit={this.handleSubmit}>
+            <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Label>Name</Label>
-                <Input 
-                    type="text" 
-                    name="name" 
-                    value={ this.state.name } 
-                    onChange={this.handleChange} />
-                </Col>
-
-         <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Label>Description</Label>
-                <Input 
-                    type="textarea" 
-                    name="description" 
-                    value={ this.state.description } 
-                    onChange={this.handleChange} />
-                 <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Input type="file" onChange={this.handleFileChange} /> 
-                </Col>
-                </Col>
+              <FormGroup>
+              <Label>Profile Image</Label>
                 <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Button type="submit">Save new image</Button>
+                  <Input type="file" onChange={this.handleFileChange}  /> 
                 </Col>
+              </FormGroup>
+            </Col>
+          </Row>
             </Form>
             <div>{this.state.feedbackMessage}</div>
           </div>

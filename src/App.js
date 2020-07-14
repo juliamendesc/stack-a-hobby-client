@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, Redirect } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
+import { Switch, Route, Redirect } from "react-router-dom";
+import AuthService from "./components/auth/auth-service";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
-import AuthService from "./components/auth/auth-service";
-import CoursesList from "./components/courses/CoursesList";
+import UserDetails from './components/Profiles/User-details';
+import UserEdit from './components/Profiles/User-edit';
 import Topbar from "./components/Topbar";
+import About from './components/About.js';
+import CoursesList from "./components/courses/CoursesList";
 import CourseDetails from "./components/courses/CourseDetails";
 import EditCourse from "./components/courses/EditCourse";
-import About from './components/About.js';
-import UserDetails from './components/Profiles/User-details';
 
 class App extends Component {
   state = {
@@ -54,7 +55,6 @@ class App extends Component {
             path="/login"
             render={(props) => (
               <Login setCurrentUser={this.setCurrentUser} {...props} />
-              
             )}
           />
           <Route
@@ -66,10 +66,16 @@ class App extends Component {
           />
           <Route
             exact
-            path="/userdetails"
+            path="/user-details"
             render={(props) => (
-              <UserDetails setCurrentUser={this.setCurrentUser} {...props} />
-              
+              <UserDetails setCurrentUser={this.setCurrentUser} loggedInUser={this.state.loggedInUser} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/users-edit"
+            render={(props) => (
+                <UserEdit setCurrentUser={this.setCurrentUser} loggedInUser={this.state.loggedInUser} {...props} />
             )}
           />
           <Route
@@ -82,12 +88,17 @@ class App extends Component {
           <Route
             exact
             path="/courses/:id"
-            render={(props) => (
-              <CourseDetails
-                {...props}
-                loggedInUser={this.state.loggedInUser}
-              />
-            )}
+            render={(props) => {
+              if (this.state.loggedInUser) {
+                return (
+                    <CourseDetails
+                      {...props}
+                      loggedInUser={this.state.loggedInUser}
+                    />
+                )} else {
+                  return <Redirect to="/login" />;
+                } 
+            }}
           />
           <Route
             exact
@@ -108,7 +119,6 @@ class App extends Component {
             )}
           />
         </Switch>
-        {/* <ToastContainer /> */}
       </div>
     );
   }
