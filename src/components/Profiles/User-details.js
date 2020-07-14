@@ -2,10 +2,12 @@ import React from "react";
 import { Button, Image, Container } from "react-bootstrap";
 import { Col, Row} from 'reactstrap';
 import { Link } from "react-router-dom";
+import moment from 'moment';
 import './User-details.css';
 
 function UserDetails(props) {
     const loggedInUser = props.loggedInUser;
+    // const userDateOfBirth = moment(loggedInUser.dateOfBirth);
     return (
       <div>
         <Container className="container">
@@ -28,7 +30,7 @@ function UserDetails(props) {
               <h5>Email: </h5> {loggedInUser && loggedInUser.email}
               </Row>
               <Row>
-              <h5>Date of Birth: </h5> {loggedInUser && loggedInUser.dateOfBirth}
+              <h5>Date of Birth: </h5> {loggedInUser && moment(loggedInUser.dateOfBirth, ["YYYY-MM-DD", "DD-MM-YYYY"]).format("DD MMMM YYYY")}
               </Row>
               <Link to="/users-edit/"><Button color="primary" type="submit">Edit Profile</Button></Link>
             </Col>
