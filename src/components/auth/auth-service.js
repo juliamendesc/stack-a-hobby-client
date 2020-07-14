@@ -3,14 +3,13 @@ import axios from 'axios';
 class AuthService {
   constructor() {
     let service = axios.create({
-      baseURL: 'https://stack-a-hobby.herokuapp.com/api',
+      baseURL: 'http://localhost:5000/api',
       withCredentials: true,
     });
     this.service = service;
   }
 
-  signup = (username, password, email, dateOfBirth, firstName, lastName) => {
-    console.log(this.service);
+  signup = (username, password, email, dateOfBirth, firstName, lastName, imageUrl) => {
     return this.service
       .post('/signup', {
         username,
@@ -19,6 +18,7 @@ class AuthService {
         dateOfBirth,
         firstName,
         lastName,
+        imageUrl
       })
       .then((response) => response.data)
       .catch((error) => {
