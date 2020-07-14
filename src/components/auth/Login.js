@@ -20,7 +20,6 @@ class Login extends Component {
     event.preventDefault();
     const { username, password } = this.state;
     this.service.login(username, password).then((response) => {
-      console.log("loggedin", response);
       this.props.setCurrentUser(response);
 
       this.setState({ username: "", password: "" });
@@ -34,7 +33,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-          <Form onSubmit={this.handleFormSubmit} style={{width:"80%", margin:"10px auto"}}>
+        <Form onSubmit={this.handleFormSubmit} style={{width:"80%", margin:"10px auto"}}>
           <Row form>
             <Col
               style={{ width: "80%", margin: "10px auto" }}

@@ -28,7 +28,7 @@ class Signup extends Component {
 
     const uploadData = new FormData();
     uploadData.append("imageUrl", file);
-    axios.post('http://localhost:5000/api/upload', uploadData)
+    axios.post('https://stack-a-hobby.herokuapp.com/api/upload', uploadData)
         .then((response) => {
            this.service
             .signup(username, password, email, dateOfBirth, firstName, lastName, response.data.imageUrl)

@@ -25,11 +25,11 @@ class AddImage extends Component {
         event.preventDefault();
         const uploadData = new FormData();
         uploadData.append("imageUrl", this.state.file);
-        axios.post('https://stack-a-hobby.herokuapp.com/api//upload', uploadData)
+        axios.post('https://stack-a-hobby.herokuapp.com/api/upload', uploadData)
             .then((response) => {
                 console.log('image uploaded', response);
                 
-                axios.post('https://stack-a-hobby.herokuapp.com/api//images/create', {
+                axios.post('https://stack-a-hobby.herokuapp.com/api/images/create', {
                     name: this.state.name,
                     description: this.state.description,
                     imageUrl: response.data.imageUrl
