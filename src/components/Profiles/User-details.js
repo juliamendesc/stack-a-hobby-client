@@ -18,13 +18,13 @@ function UserDetails(props) {
               </Col>
               <Col xs={7} md={5}>
               <Row>
+              <h5>Username: </h5> {loggedInUser && loggedInUser.username}
+              </Row>
+              <Row>
               <h5>First Name: </h5> {loggedInUser && loggedInUser.firstName}
               </Row>
               <Row>
               <h5>Last Name: </h5> {loggedInUser && loggedInUser.lastName}
-              </Row>
-              <Row>
-              <h5>Username: </h5> {loggedInUser && loggedInUser.username}
               </Row>
               <Row>
               <h5>Email: </h5> {loggedInUser && loggedInUser.email}
