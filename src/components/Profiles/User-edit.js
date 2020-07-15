@@ -8,14 +8,18 @@ import { ToastContainer } from "react-toastify";
 
 class UserEdit extends Component {
   state = {
-    username: "",
-    password: "",
     email: "",
     dateOfBirth: "",
     firstName: "",
     lastName: "",
+    imageUrl: "",
+    file: ""
   };
   service = new AuthService();
+
+  handleFileChange = (event) => {
+    this.setState({ file: event.target.files[0]});
+  };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,58 +29,31 @@ class UserEdit extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const userId = this.props.loggedInUser._id;
-    const {
-      username,
-      email,
-      dateOfBirth,
-      firstName,
-      lastName,
-    //   file,
-    } = this.state;
-    // const { params } = this.props.match;
-    axios
-      .put(`https://stack-a-hobby.herokuapp.com/api/users-edit/${userId}`, {
-        username,
-        email,
-        dateOfBirth,
-        firstName,
-        lastName,
-      })
-      .then(() => {
-        this.props.history.push("/courses");
-      });
+    const {email, dateOfBirth, firstName, lastName, imageUrl, file} = this.state;
+    // const uploadData = new FormData();
+    // uploadData.append("imageUrl", file);
+    // axios.post('https://stack-a-hobby.herokuapp.com/api/upload', uploadData)
+    // .then((response) => {
+    //   const image = response.data.imageUrl;
+      axios
+        .put(`https://stack-a-hobby.herokuapp.com/api/users-edit/${userId}`, {
+          email,
+          dateOfBirth,
+          firstName,
+          lastName,
+          // image,
+          file
+        })
+        .then(() => {
+          this.props.history.push("/courses");
+        })
+      // })
   };
 
   render() {
     return (
       <div>
         <Form onSubmit={this.handleFormSubmit}>
-          <Row form>
-            <Col sm={6} md={{ size: 3, offset: 3 }}>
-              <FormGroup>
-                <Label>Username:</Label>
-                <Input
-                  type="text"
-                  name="username"
-                  value={this.state.username}
-                  placeholder="Username"
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col sm={6} md={{ size: 3, offset: -1 }}>
-              <FormGroup>
-                <Label>Password:</Label>
-                <Input
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
           <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <FormGroup>
@@ -90,7 +67,6 @@ class UserEdit extends Component {
               </FormGroup>
             </Col>
           </Row>
-
           <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <FormGroup>

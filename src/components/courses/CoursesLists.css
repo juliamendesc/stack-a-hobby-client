@@ -1,7 +1,17 @@
 .card-deck {
-    margin: 50px auto;
+    margin: 10px 200px;
+    width: 800px;
 }
 
-.card-wrapper {
+/* .card-wrapper {
     margin: 10px auto;
+    width: 200px;
+} */
+
+.card-text {
+    font-size: 12px;
+}
+
+.card-title {
+    font-size: 18px;
 }

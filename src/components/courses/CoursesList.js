@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Card, CardDeck } from "react-bootstrap";
-import { Col, Row } from "reactstrap";
+import "./CoursesLists.css";
 // import ReactPlayer from "react-player/youtube";
 
 class CoursesList extends Component {
@@ -25,40 +25,38 @@ class CoursesList extends Component {
 
   render() {
     return (
-      <div>
-        <div style={{ width: "60%", float: "left" }}>
-          <CardDeck className="card-deck">
-            <Row>
-                <Card className="card-wrapper">
-                  {this.state.listOfCourses.map((course) => {
-                    return (
-                      <div key={course._id}>
-                        <Row>
-                        <Col xs={7} md={4}>
-                        <Card.Img variant="top" src={course.image} />
-                        <Card.Body>
-                          <Link to={`/courses/${course._id}`}>
-                            <Card.Title>{course.title}</Card.Title>
-                          </Link>
-                          <Card.Text>{course.description}</Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                          <small className="text-muted">
-                            Category: {course.category}
-                          </small>
-                        </Card.Footer>
-                        </Col>
-                        </Row>
-                      </div>
-                    );
-                  })}
-                </Card>
-            </Row>
-          </CardDeck>
-        </div>
-        <div style={{ width: "40%", float: "right" }}>
-          {/* <AddCourse refreshProjects={this.getAllProjects} /> */}
-        </div>
+      <div className="card-deck">
+        {/* <div style={{ width: "60%", float: "left" }}> */}
+        <CardDeck>
+          {this.state.listOfCourses.map((course) => {
+            return (
+              <Card className="card-wrapper" key={course._id}>
+                <Card.Img variant="top" src={course.imageURL} />
+                <Card.Body>
+                  <Link to={`/courses/${course._id}`}>
+                    <Card.Subtitle className="card-title">
+                      {course.title}
+                    </Card.Subtitle>
+                  </Link>
+                  <br/>
+                  <Card.Text className="card-text">
+                    {course.description}
+                  </Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                  <small className="text-muted">
+                    <b>Category:</b> {course.category}
+                  </small>
+                </Card.Footer>
+              </Card>
+            );
+          })}
+        </CardDeck>
+        {/* </div> */}
+        {/* // <div style={{ width: "40%", float: "right" }}> */}
+        {/* <AddCourse refreshProjects={this.getAllProjects} /> */}
+        {/* </div> */}
+        <br />
       </div>
     );
   }

@@ -10,6 +10,11 @@ class AuthService {
   }
 
   signup = (username, password, email, dateOfBirth, firstName, lastName, imageUrl) => {
+    // if (TEM FOTO) {
+    //     const imageUrl = foto feita upload 
+    // } else {
+    //   const imageUrl = foto default
+    // } 
     return this.service
       .post('/signup', {
         username,
