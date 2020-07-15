@@ -26,7 +26,6 @@ class UserEdit extends Component {
     event.preventDefault();
     const userId = this.props.loggedInUser._id;
     const {
-      username,
       email,
       dateOfBirth,
       firstName,
@@ -36,7 +35,6 @@ class UserEdit extends Component {
     // const { params } = this.props.match;
     axios
       .put(`https://stack-a-hobby.herokuapp.com/api/users-edit/${userId}`, {
-        username,
         email,
         dateOfBirth,
         firstName,
@@ -48,44 +46,23 @@ class UserEdit extends Component {
   };
 
   render() {
+    const loggedInUser = this.props.loggedInUser;
     return (
       <div>
         <Form onSubmit={this.handleFormSubmit}>
-          <Row form>
-            <Col sm={6} md={{ size: 3, offset: 3 }}>
-              <FormGroup>
-                <Label>Username:</Label>
-                <Input
-                  type="text"
-                  name="username"
-                  value={this.state.username}
-                  placeholder="Username"
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col sm={6} md={{ size: 3, offset: -1 }}>
-              <FormGroup>
-                <Label>Password:</Label>
-                <Input
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
+ 
           <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <FormGroup>
-                <Label>Email:</Label>
+                <Label>Email</Label>
                 <Input
+                  
                   type="email"
+                  placeholder={loggedInUser && loggedInUser.email}
                   name="email"
                   value={this.state.email}
                   onChange={this.handleChange}
+                  required
                 />
               </FormGroup>
             </Col>
@@ -94,12 +71,13 @@ class UserEdit extends Component {
           <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <FormGroup>
-                <Label>Date of Birth:</Label>
+                <Label>Date of Birth</Label>
                 <Input
                   type="date"
                   name="dateOfBirth"
                   value={this.state.dateOfBirth}
                   onChange={this.handleChange}
+                  required
                 />
               </FormGroup>
             </Col>
@@ -107,13 +85,14 @@ class UserEdit extends Component {
           <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <FormGroup>
-                <Label>First Name:</Label>
+                <Label>First Name</Label>
                 <Input
                   type="text"
                   name="firstName"
                   placeholder="John"
                   value={this.state.firstName}
                   onChange={this.handleChange}
+                  required
                 />
               </FormGroup>
             </Col>
@@ -121,24 +100,15 @@ class UserEdit extends Component {
           <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <FormGroup>
-                <Label>Last Name:</Label>
+                <Label>Last Name</Label>
                 <Input
                   type="text"
                   name="lastName"
                   placeholder="Doe"
                   value={this.state.lastName}
                   onChange={this.handleChange}
+                  required
                 />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Profile Image</Label>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                  <Input type="file" onChange={this.handleFileChange} />
-                </Col>
               </FormGroup>
             </Col>
           </Row>
