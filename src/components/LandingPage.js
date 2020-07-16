@@ -6,7 +6,7 @@ import "./LandingPage.css";
 function LandingPage(props) {
   return (
     <div>
-        <Jumbotron className="landing-jumbotron" style={{ height: '30rem' }}>
+        <Jumbotron responsive="lg" className="landing-jumbotron">
             <div className="jumbotron-text">
             <h1 className="jumbotron-h1">Explore your interests</h1>
             <p className="jumbotron-p">
