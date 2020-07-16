@@ -32,9 +32,9 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login-form">
         <Form onSubmit={this.handleFormSubmit} style={{width:"80%", margin:"10px auto"}}>
-          <Row form>
+          <Row form >
             <Col
               style={{ width: "80%", margin: "10px auto" }}
               sm={6}

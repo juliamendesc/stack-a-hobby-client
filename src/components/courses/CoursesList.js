@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Card, CardDeck } from "react-bootstrap";
+import { Jumbotron, Card, CardDeck } from "react-bootstrap";
 import "./CoursesLists.css";
-// import ReactPlayer from "react-player/youtube";
 
 class CoursesList extends Component {
   state = {
@@ -25,8 +24,7 @@ class CoursesList extends Component {
 
   render() {
     return (
-      <div className="card-deck">
-        {/* <div style={{ width: "60%", float: "left" }}> */}
+      <Jumbotron fluid className="courses-cardDeck">
         <CardDeck>
           {this.state.listOfCourses.map((course) => {
             return (
@@ -38,7 +36,6 @@ class CoursesList extends Component {
                       {course.title}
                     </Card.Subtitle>
                   </Link>
-                  <br/>
                   <Card.Text className="card-text">
                     {course.description}
                   </Card.Text>
@@ -56,8 +53,7 @@ class CoursesList extends Component {
         {/* // <div style={{ width: "40%", float: "right" }}> */}
         {/* <AddCourse refreshProjects={this.getAllProjects} /> */}
         {/* </div> */}
-        <br />
-      </div>
+      </Jumbotron>
     );
   }
 }

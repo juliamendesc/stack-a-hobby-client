@@ -13,7 +13,7 @@ import CoursesList from "./components/courses/CoursesList";
 import CourseDetails from "./components/courses/CourseDetails";
 import EditCourse from "./components/courses/EditCourse";
 import LandingPage from "./components/LandingPage";
-import Footer from "./components/Footer";
+import FooterPage from "./components/Footer";
 
 class App extends Component {
   state = {
@@ -129,7 +129,7 @@ class App extends Component {
             )}
           />
         </Switch>
-        <Footer />
+        <FooterPage />
       </div>
     );
   }
