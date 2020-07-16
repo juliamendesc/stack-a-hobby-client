@@ -12,6 +12,8 @@ import About from './components/About.js';
 import CoursesList from "./components/courses/CoursesList";
 import CourseDetails from "./components/courses/CourseDetails";
 import EditCourse from "./components/courses/EditCourse";
+import LandingPage from "./components/LandingPage";
+import Footer from "./components/Footer";
 
 class App extends Component {
   state = {
@@ -49,7 +51,15 @@ class App extends Component {
           setCurrentUser={this.setCurrentUser}
           loggedInUser={this.state.loggedInUser}
         />
+
         <Switch>
+        <Route
+            exact
+            path="/"
+            render={(props) => (
+              <LandingPage setCurrentUser={this.setCurrentUser} {...props} />
+            )}
+          />
           <Route
             exact
             path="/login"
@@ -119,6 +129,7 @@ class App extends Component {
             )}
           />
         </Switch>
+        <Footer />
       </div>
     );
   }
