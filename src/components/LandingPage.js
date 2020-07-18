@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Jumbotron, Button, Image, Container, Card, CardGroup, CardDeck } from "react-bootstrap";
+import { Jumbotron, Button, Image, Container, Card, CardGroup, CardDeck, Col, Row } from "react-bootstrap";
 import "./LandingPage.css";
 
 function LandingPage(props) {
   return (
     <div>
         <Jumbotron responsive="lg" className="landing-jumbotron">
-            <div className="jumbotron-text">
+        <Container className="jumbotron-text">
+        <Row>
+            {/* <Col xs={7}> */}
+            {/* <Row> */}
+            <Col xs={7}>
             <h1 className="jumbotron-h1">Explore your interests</h1>
             <p className="jumbotron-p">
                 Stack-a-hobby helps you learn new activities by connecting you to
@@ -25,13 +29,17 @@ function LandingPage(props) {
                 </Button>
                 </Link>
             </p>
-            </div>
-            <div className="landing-image">
+            </Col>
+            {/* </Row> */}
+            {/* </Col> */}
+            <Col xs={5} className="landing-image">
             <Image
                 src="https://res.cloudinary.com/jmc10/image/upload/v1594907725/myFolder/ezgif.com-optimize_wm6vqe.gif"
                 fluid
             />
-            </div>
+            </Col>
+            </Row>
+            </Container>
         </Jumbotron>
         <div>
             <Container>
@@ -41,13 +49,13 @@ function LandingPage(props) {
                 something new for free and those who wish to share their passion and
                 practice their teaching skills.
             </p>
-            <div>
+            {/* <div>
             <img className="squares" src="https://img.icons8.com/ios-filled/50/000000/rectangle.png"/>
             <img className="squares" src="https://img.icons8.com/ios-filled/50/000000/rectangle.png"/>
             <img className="squares" src="https://img.icons8.com/ios-filled/50/000000/rectangle.png"/>
             <img className="squares" src="https://img.icons8.com/ios-filled/50/000000/rectangle.png"/>
             <img className="squares" src="https://img.icons8.com/ios-filled/50/000000/rectangle.png"/>
-            </div>
+            </div> */}
             </Container>
         </div>
         <Jumbotron fluid>

@@ -3,26 +3,26 @@
 }
 .landing-image {
     margin-top: 30px;
-    width: 60%;
-    height: 60%;
-    float: right;
+    /* width: 60%;
+    height: 60%; */
+    /* float: right; */
 }
 
 .jumbotron-text {
-    width: 40%;
-    float: left;
+    /* width: 40%; */
+    /* float: left; */
 }
 
 .jumbotron-h1 {
-    margin-left: 100px;
-    margin-bottom: 20px;
+    /* margin-left: 100px;
+    margin-bottom: 20px; */
     font-size: 4em;
     text-align: left;
 }
 
 .jumbotron-p {
-    margin-left: 100px;
-    padding-bottom: 10px;
+    /* margin-left: 100px;
+    padding-bottom: 10px; */
     font-size: 1.25em;
     text-align: left;
 }

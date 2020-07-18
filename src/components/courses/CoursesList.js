@@ -24,7 +24,7 @@ class CoursesList extends Component {
 
   render() {
     return (
-      <Jumbotron responsive="md" fluid className="courses-cardDeck">
+      <Jumbotron responsive="ld" fluid className="courses-cardDeck">
         <CardDeck>
           {this.state.listOfCourses.map((course) => {
             return (

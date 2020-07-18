@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import ReactPlayer from 'react-player/youtube';
-import './CourseDetails.css';
+import ReactPlayer from "react-player/youtube";
+import AddComment from "./AddComment";
+import { Table } from "reactstrap";
+import moment from "moment";
+import "./CourseDetails.css";
 
 class CourseDetails extends Component {
   state = {};
@@ -12,7 +15,7 @@ class CourseDetails extends Component {
     axios
       .get(`https://stack-a-hobby.herokuapp.com/api/courses/${params.id}`)
       .then((responseFromAPI) => {
-        const course = responseFromAPI.data
+        const course = responseFromAPI.data;
         this.setState(course);
       });
   };
@@ -33,14 +36,17 @@ class CourseDetails extends Component {
 
   render() {
     const { params } = this.props.match;
+    const loggedInUser = this.props.loggedInUser._id;
     return (
       <div>
         <div>
           <div>
             <h1>{this.state.title}</h1>
-            <p>{this.state.description}
-            <ReactPlayer className="course-video" url={this.state.videoURL}/></p>
-            {this.props.loggedInUser && (
+            <div>
+              {this.state.description}
+              <ReactPlayer className="course-video" url={this.state.videoURL} />
+            </div>
+            {loggedInUser && (
               <div>
                 <button onClick={() => this.deleteCourse()}>
                   Delete course
@@ -64,18 +70,46 @@ class CourseDetails extends Component {
           </Link>
         </div>
         <hr />
-        {/* <div>
-          <AddTask
-            getCourse={this.getSingleCourse}
-            CourseId={this.state._id}
-          />
-        </div> */}
-        {/* <div>
-          {this.state.comments &&
-            this.state.comments.map((task) => {
-              return <div key={comment._id}>{comment.content}</div>;
-            })}
-        </div> */}
+        <div>
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Reviewer</th>
+                <th>Comment</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.comments &&
+                this.state.comments.map((comment) => {
+                  return (
+                    <tr key={comment._id}>
+                      <th scope="row">1</th>
+                      <td>{comment.username}</td>
+                      <td>{comment.content}</td>
+                      <td>
+                        {moment.unix(comment.createdAt, [
+                          "YYYY-MM-DD",
+                          "DD-MM-YYYY",
+                        ]).format("MM/DD/YYYY, HH:mm")}
+                        {/* {moment(comment.createdAt, [
+                          "YYYY-MM-DD",
+                          "DD-MM-YYYY",
+                        ]).format("DD MMMM YYYY, HH:mm zz")} */}
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </Table>
+        </div>
+        <hr />
+        {this.props.loggedInUser && (
+          <div>
+            <AddComment {...this.props} loggedInUser params />
+          </div>
+        )}
       </div>
     );
   }

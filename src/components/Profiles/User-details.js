@@ -1,13 +1,13 @@
-import React from "react";
+import React, {Component} from "react";
 import { Button, Image, Container } from "react-bootstrap";
 import { Col, Row} from 'reactstrap';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import './User-details.css';
 
-function UserDetails(props) {
-    const loggedInUser = props.loggedInUser;
-    // const userDateOfBirth = moment(loggedInUser.dateOfBirth);
+class UserDetails extends Component {
+  render() {
+    const loggedInUser = this.props.loggedInUser;
     return (
       <div>
         <Container className="container">
@@ -41,6 +41,7 @@ function UserDetails(props) {
           </div>
           <div>
             My Comments
+
           </div>
           <div>
             My Ratings
@@ -48,6 +49,7 @@ function UserDetails(props) {
         </Container>
       </div>
     );
+  }
 }
 
 export default UserDetails;
