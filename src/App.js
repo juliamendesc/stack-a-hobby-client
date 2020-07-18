@@ -15,6 +15,7 @@ import EditCourse from "./components/courses/EditCourse";
 import LandingPage from "./components/LandingPage";
 import FooterPage from "./components/Footer";
 
+
 class App extends Component {
   state = {
     loggedInUser: null,
@@ -67,11 +68,17 @@ class App extends Component {
               <Login setCurrentUser={this.setCurrentUser} {...props} />
             )}
           />
+           <Route 
+           path='/login-google' 
+           //heroku
+           component={() => { window.location.href = 'https://stack-a-hobby.herokuapp.com/api/auth/google' }}/>
+
           <Route
             exact
             path="/signup"
             render={(props) => (
               <Signup setCurrentUser={this.setCurrentUser} {...props} />
+
             )}
           />
           <Route

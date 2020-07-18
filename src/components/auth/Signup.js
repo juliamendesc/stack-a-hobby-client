@@ -3,6 +3,7 @@ import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 
 class Signup extends Component {
@@ -13,19 +14,20 @@ class Signup extends Component {
     dateOfBirth: "",
     firstName: "",
     lastName: "",
+    isTeacher:"",
    };
   service = new AuthService();
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { username, password, email, dateOfBirth, firstName, lastName, file } = this.state;
+    const { username, password, email, dateOfBirth, firstName, lastName, file, isTeacher, dropDownValue } = this.state;
 
     const uploadData = new FormData();
     uploadData.append("imageUrl", file);
     axios.post('https://stack-a-hobby.herokuapp.com/api/upload', uploadData)
         .then((response) => {
            this.service
-            .signup(username, password, email, dateOfBirth, firstName, lastName, response.data.imageUrl)
+            .signup(username, password, email, dateOfBirth, firstName, lastName, response.data.imageUrl, isTeacher, dropDownValue)
             .then((response) => {
               this.setState({
                 username: "",
@@ -34,6 +36,8 @@ class Signup extends Component {
                 dateOfBirth: "",
                 firstName: "",
                 lastName: "",
+                isTeacher:"",
+                dropDownValue:"",
               });
               this.props.setCurrentUser(response);
               this.props.history.push("/courses")
@@ -57,6 +61,10 @@ class Signup extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  handleChangeValue(e) {
+    this.setState({dropDownValue: e.currentTarget.textContent})
+  }
 
   render() {
     return (
@@ -144,6 +152,17 @@ class Signup extends Component {
               </FormGroup>
             </Col>
           </Row>
+
+          <Dropdown direction="right" isOpen={this.state.btnDropleft} toggle={() => { this.setState({ btnDropleft: !this.state.btnDropleft}); }}>
+        <DropdownToggle caret>
+        Type of Profile {this.state.dropDownValue} 
+      </DropdownToggle>
+      <DropdownMenu>
+        <DropdownItem><div onClick={this.handleChangeValue}>Teacher</div></DropdownItem>
+        <DropdownItem><div onClick={this.handleChangeValue}>Student</div></DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+
           <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <FormGroup>
@@ -154,7 +173,7 @@ class Signup extends Component {
               </FormGroup>
             </Col>
           </Row>
-
+          
           <Button color="primary" type="submit" value="Signup" >Signup</Button>
         </Form>
         <p>

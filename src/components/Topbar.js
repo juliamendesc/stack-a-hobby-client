@@ -43,7 +43,7 @@ class Topbar extends Component {
                   Welcome {this.props.loggedInUser.firstName}{" "}
                   {this.props.loggedInUser.lastName}
                 </Nav.Link>
-                <Nav.Link onClick={() => this.logoutUser()}>Logout</Nav.Link>
+                <Nav.Link href="/" onClick={() => this.logoutUser()}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -71,6 +71,10 @@ class Topbar extends Component {
                   {" "}
                   <Button variant="light">Login</Button>
                 </Nav.Link>
+                <Nav.Link href='/login-google'>
+                {" "}
+                <Button variant="light">Login using Google</Button> 
+                  </Nav.Link>
                 <Nav.Link href="/signup">
                   <Button variant="dark">Signup</Button>
                 </Nav.Link>
