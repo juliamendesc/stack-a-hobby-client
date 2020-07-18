@@ -14,6 +14,7 @@ import CourseDetails from "./components/courses/CourseDetails";
 import EditCourse from "./components/courses/EditCourse";
 import LandingPage from "./components/LandingPage";
 import FooterPage from "./components/Footer";
+import AddComment from './components/courses/AddComment';
 
 
 class App extends Component {
@@ -123,6 +124,21 @@ class App extends Component {
             render={(props) => {
               if (this.state.loggedInUser) {
                 return <EditCourse {...props} />;
+              } else {
+                return <Redirect to="/login" />;
+              }
+            }}
+          />
+          <Route
+            exact
+            path="/courses/:id/comments"
+            render={(props) => {
+              if (this.state.loggedInUser) {
+                return <AddComment 
+                {...props} 
+                loggedInUser={this.state.loggedInUser}
+                setCurrentUser={this.setCurrentUser}
+                />;
               } else {
                 return <Redirect to="/login" />;
               }
