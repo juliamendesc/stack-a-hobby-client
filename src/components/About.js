@@ -1,11 +1,12 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
-import Button from 'react-bootstrap/Button';
+import { Card, Button, Jumbotron } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 import './About.css';
 
 function About() {
   return (
+    <Jumbotron responsive="lg" className="about-jumbotron">
     <Card className="about-card" >
       <Card.Header><h4>A chance to teach and learn!</h4></Card.Header>
       <Card.Body className="about-card-body" >
@@ -27,6 +28,7 @@ function About() {
         <Link to="/courses"><Button variant="info">See our Courses!</Button></Link>
       </Card.Body>
     </Card>
+    </Jumbotron>
   );
 }
 

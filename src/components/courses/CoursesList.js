@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Jumbotron, Card, CardDeck } from "react-bootstrap";
+import { Jumbotron, Card, CardImg, CardText, CardBody, CardTitle, CardFooter, Row, Col} from 'reactstrap';
+import Search from '../Search';
 import "./CoursesLists.css";
+import 'bootstrap/dist/css/bootstrap.css';
 
 class CoursesList extends Component {
   state = {
     listOfCourses: [],
+    filtered:[],
   };
 
   getAllCourses = () => {
@@ -15,45 +18,71 @@ class CoursesList extends Component {
       .then((responseFromAPI) => {
         this.setState({
           listOfCourses: responseFromAPI.data,
-        });
+          filtered: responseFromAPI.data
+        })
       });
   };
   componentDidMount() {
     this.getAllCourses();
   }
 
+  filterCoursesHandler = (input) => {
+    const filtered = this.state.listOfCourses.filter(el => {
+      return el.title.toLowerCase().includes(input.toLowerCase());
+    });
+    this.setState({ filtered: filtered});  
+  }
+
   render() {
+    const isTeacher = this.props.loggedInUser && this.props.loggedInUser.isTeacher;
     return (
-      <Jumbotron responsive="ld" fluid className="courses-cardDeck">
-        <CardDeck>
-          {this.state.listOfCourses.map((course) => {
+      <div>
+      <Jumbotron responsive="lg" fluid className="courses-jumbotron">
+      <Search filterCourses={this.filterCoursesHandler}/>
+      <div className="add-course">
+        {isTeacher && (
+          <Link
+            to={{
+              pathname: `/courses/add-course`,
+            }}
+          >
+            Add Your Course
+          </Link>
+           )}
+        </div>
+      <Row xs="1" sm="2" md="4">
+           {this.state.filtered.map((course) => {
+            const courseImage = course.imageURL;
             return (
-              <Card className="card-wrapper" key={course._id}>
-                <Card.Img variant="top" src={course.imageURL} />
-                <Card.Body>
+              <Col sm={{ size: 3}}>
+              <Card key={course._id}>
+                <CardImg 
+                top width="100%" src={courseImage}/>
+                <CardBody>
                   <Link to={`/courses/${course._id}`}>
-                    <Card.Subtitle className="card-title">
+                    <CardTitle>
                       {course.title}
-                    </Card.Subtitle>
+                    </CardTitle>
                   </Link>
-                  <Card.Text className="card-text">
+                  <CardText>
                     {course.description}
-                  </Card.Text>
-                </Card.Body>
-                <Card.Footer>
+                  </CardText>
+                </CardBody>
+                <CardFooter>
                   <small className="text-muted">
                     <b>Category:</b> {course.category}
                   </small>
-                </Card.Footer>
+                </CardFooter>
               </Card>
+              </Col>
             );
           })}
-        </CardDeck>
-        {/* </div> */}
+        </Row>
         {/* // <div style={{ width: "40%", float: "right" }}> */}
         {/* <AddCourse refreshProjects={this.getAllProjects} /> */}
         {/* </div> */}
       </Jumbotron>
+      </div>
     );
   }
 }

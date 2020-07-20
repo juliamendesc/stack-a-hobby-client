@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 class AuthService {
   constructor() {
@@ -11,11 +10,6 @@ class AuthService {
   }
 
   signup = (username, password, email, dateOfBirth, firstName, lastName, imageUrl, isTeacher) => {
-    // if (TEM FOTO) {
-    //     const imageUrl = foto feita upload 
-    // } else {
-    //   const imageUrl = foto default
-    // } 
     return this.service
       .post('/signup', {
         username,
@@ -25,7 +19,7 @@ class AuthService {
         firstName,
         lastName,
         imageUrl,
-        isTeacher
+        isTeacher: false
       })
       .then((response) => response.data)
       .catch((error) => {

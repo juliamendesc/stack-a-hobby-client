@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AuthService from "../auth/auth-service";
-// import Container from "react-bootstrap/Container";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
-// import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 class UserEdit extends Component {

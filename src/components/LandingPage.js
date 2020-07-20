@@ -58,7 +58,7 @@ function LandingPage(props) {
             </div> */}
             </Container>
         </div>
-        <Jumbotron fluid>
+        <Jumbotron fluid >
             <Container>
                 <h1>A diverse range of hobbies</h1>
                 <p className="third-p">

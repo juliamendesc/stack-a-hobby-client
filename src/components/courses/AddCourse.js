@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Col, Row, Form, FormGroup, Label, Input } from "reactstrap";
 
-class EditCourse extends Component {
+class AddCourse extends Component {
   state = {
-    title: this.props.location.state.title,
-    description: this.props.location.state.description,
-    videoURL: this.props.location.state.videoURL,
-    category: this.props.location.state.category,
-    imageURL: this.props.location.state.imageURL,
+    title: "",
+    description: "",
+    videoURL: "",
+    category: "",
+    imageURL: "",
+    author: "",
   };
 
   handleChange = (event) => {
@@ -19,14 +20,15 @@ class EditCourse extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const { title, description, videoURL, category, imageURL } = this.state;
-    const { params } = this.props.match;
+    const author = this.props.loggedInUser.username;
     axios
-      .put(`https://stack-a-hobby.herokuapp.com/api/courses/${params.id}`, {
+      .post(`https://stack-a-hobby.herokuapp.com/api/courses/`, {
         title,
         description,
         videoURL,
         category,
-        imageURL
+        imageURL,
+        author
       })
       .then(() => {
         this.props.history.push("/courses");
@@ -36,7 +38,7 @@ class EditCourse extends Component {
   render() {
     return (
       <div>
-        <h3>Edit Form</h3>
+        <h3>Add Your Course</h3>
         <Form onSubmit={this.handleFormSubmit}>
           <Row form>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
@@ -109,4 +111,4 @@ class EditCourse extends Component {
     );
   }
 }
-export default EditCourse;
+export default AddCourse;

@@ -8,10 +8,10 @@
     /* float: right; */
 }
 
-.jumbotron-text {
+/* .jumbotron-text { */
     /* width: 40%; */
     /* float: left; */
-}
+/* } */
 
 .jumbotron-h1 {
     /* margin-left: 100px;
@@ -32,7 +32,8 @@
 }
 
 .second-jumbotron {
-    height: 350px;
+    margin-top: -50px;
+    /* height: 350px; */
     background-color: white;
 }
 

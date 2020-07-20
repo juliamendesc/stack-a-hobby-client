@@ -15,7 +15,7 @@ import EditCourse from "./components/courses/EditCourse";
 import LandingPage from "./components/LandingPage";
 import FooterPage from "./components/Footer";
 import AddComment from './components/courses/AddComment';
-
+import AddCourse from './components/courses/AddCourse';
 
 class App extends Component {
   state = {
@@ -47,13 +47,13 @@ class App extends Component {
   }
 
   render() {
+    const { loggedInUser } = this.state;
     return (
       <div className="App">
         <Topbar
           setCurrentUser={this.setCurrentUser}
-          loggedInUser={this.state.loggedInUser}
+          loggedInUser={loggedInUser}
         />
-
         <Switch>
         <Route
             exact
@@ -86,32 +86,47 @@ class App extends Component {
             exact
             path="/user-details"
             render={(props) => (
-              <UserDetails setCurrentUser={this.setCurrentUser} loggedInUser={this.state.loggedInUser} {...props} />
+              <UserDetails setCurrentUser={this.setCurrentUser} loggedInUser={loggedInUser} {...props} />
             )}
           />
           <Route
             exact
             path="/users-edit"
             render={(props) => (
-                <UserEdit setCurrentUser={this.setCurrentUser} loggedInUser={this.state.loggedInUser} {...props} />
+                <UserEdit setCurrentUser={this.setCurrentUser} loggedInUser={loggedInUser} {...props} />
             )}
           />
           <Route
             exact
             path="/courses"
             render={(props) => (
-              <CoursesList setCurrentUser={this.setCurrentUser} {...props} />
+              <CoursesList setCurrentUser={this.setCurrentUser} {...props} loggedInUser={loggedInUser} getAllCourses={this.getAllCourses} />
             )}
+          />
+          <Route
+            exact
+            path="/courses/add-course"
+            render={(props) => {
+              if (loggedInUser) {
+                return (
+                    <AddCourse
+                      {...props}
+                      loggedInUser={loggedInUser}
+                    />
+                )} else {
+                  return <Redirect to="/login" />;
+                }
+              }}
           />
           <Route
             exact
             path="/courses/:id"
             render={(props) => {
-              if (this.state.loggedInUser) {
+              if (loggedInUser) {
                 return (
                     <CourseDetails
                       {...props}
-                      loggedInUser={this.state.loggedInUser}
+                      loggedInUser={loggedInUser}
                     />
                 )} else {
                   return <Redirect to="/login" />;
@@ -122,7 +137,7 @@ class App extends Component {
             exact
             path="/courses/:id/edit"
             render={(props) => {
-              if (this.state.loggedInUser) {
+              if (loggedInUser) {
                 return <EditCourse {...props} />;
               } else {
                 return <Redirect to="/login" />;
@@ -133,10 +148,10 @@ class App extends Component {
             exact
             path="/courses/:id/comments"
             render={(props) => {
-              if (this.state.loggedInUser) {
+              if (loggedInUser) {
                 return <AddComment 
                 {...props} 
-                loggedInUser={this.state.loggedInUser}
+                loggedInUser={loggedInUser}
                 setCurrentUser={this.setCurrentUser}
                 />;
               } else {

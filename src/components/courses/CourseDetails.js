@@ -36,7 +36,7 @@ class CourseDetails extends Component {
 
   render() {
     const { params } = this.props.match;
-    const loggedInUser = this.props.loggedInUser._id;
+    const isTeacher = this.props.loggedInUser.isTeacher;
     return (
       <div>
         <div>
@@ -46,7 +46,7 @@ class CourseDetails extends Component {
               {this.state.description}
               <ReactPlayer className="course-video" url={this.state.videoURL} />
             </div>
-            {loggedInUser && (
+            {isTeacher && (
               <div>
                 <button onClick={() => this.deleteCourse()}>
                   Delete course
@@ -57,6 +57,7 @@ class CourseDetails extends Component {
         </div>
 
         <div>
+        {isTeacher && (
           <Link
             to={{
               pathname: `/courses/${params.id}/edit`,
@@ -68,6 +69,7 @@ class CourseDetails extends Component {
           >
             Edit Course
           </Link>
+           )}
         </div>
         <hr />
         <div>
@@ -89,14 +91,10 @@ class CourseDetails extends Component {
                       <td>{comment.username}</td>
                       <td>{comment.content}</td>
                       <td>
-                        {moment.unix(comment.createdAt, [
+                        {moment(comment.createdAt, [
                           "YYYY-MM-DD",
                           "DD-MM-YYYY",
-                        ]).format("MM/DD/YYYY, HH:mm")}
-                        {/* {moment(comment.createdAt, [
-                          "YYYY-MM-DD",
-                          "DD-MM-YYYY",
-                        ]).format("DD MMMM YYYY, HH:mm zz")} */}
+                        ]).format("DD MMMM YYYY")}
                       </td>
                     </tr>
                   );
@@ -107,7 +105,7 @@ class CourseDetails extends Component {
         <hr />
         {this.props.loggedInUser && (
           <div>
-            <AddComment {...this.props} loggedInUser params />
+            <AddComment {...this.props} getSingleCourse={this.getSingleCourse} loggedInUser params />
           </div>
         )}
       </div>

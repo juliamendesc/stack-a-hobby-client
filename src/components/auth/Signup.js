@@ -21,7 +21,7 @@ class Signup extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const { username, password, email, dateOfBirth, firstName, lastName, file, isTeacher, dropDownValue } = this.state;
-
+    // const isTeacher = false;
     const uploadData = new FormData();
     uploadData.append("imageUrl", file);
     axios.post('https://stack-a-hobby.herokuapp.com/api/upload', uploadData)

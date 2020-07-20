@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "./auth/auth-service";
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Nav, Form, Button } from "react-bootstrap";
 
 class Topbar extends Component {
   service = new AuthService();
@@ -30,12 +30,13 @@ class Topbar extends Component {
                 <Nav.Link href="/about">About</Nav.Link>
                 <Nav.Link href="/courses">Courses</Nav.Link>
                 <Form inline>
-                  <FormControl
+                  {/* <FormControl
                     type="text"
                     placeholder="Search"
                     className="mr-sm-2"
                   />
-                  <Button variant="outline-info">Search</Button>
+                  <Button variant="outline-info">Search</Button> */}
+                  
                 </Form>
               </Nav>
               <Nav className="justify-content-end">

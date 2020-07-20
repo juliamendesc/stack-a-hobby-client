@@ -1,3 +1,18 @@
-.card-text {
-    font-size: 14px;
+.search-bar {
+    float: left;
+    margin-top: -35px;
+    margin-left: 10px;
+}
+
+.courses-jumbotron {
+    margin-top: -20px;
+}
+.course-container {
+    margin: 10px 450px;
+}
+
+.add-course {
+    margin-top: -35px;
+    float: right;
+    margin-right: 10px;
 }

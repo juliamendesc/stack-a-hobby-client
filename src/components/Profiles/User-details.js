@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { Button, Image, Container } from "react-bootstrap";
-import { Col, Row} from 'reactstrap';
+import { Col, Row, Table} from 'reactstrap';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import './User-details.css';
@@ -41,7 +41,36 @@ class UserDetails extends Component {
           </div>
           <div>
             My Comments
-
+            <div>
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Course</th>
+                <th>Comment</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* {{loggedInUser && 
+              loggedInUser.comments.map((comment) => {
+                  return (
+                    <tr key={comment._id}>
+                      <th scope="row">1</th>
+                      <td>{comment.course}</td>
+                      <td>{comment.content}</td>
+                      <td>
+                        {moment(comment.createdAt, [
+                          "YYYY-MM-DD",
+                          "DD-MM-YYYY",
+                        ]).format("DD MMMM YYYY")}
+                      </td>
+                    </tr>
+                  );
+                })} */}
+            </tbody>
+          </Table>
+        </div>
           </div>
           <div>
             My Ratings
