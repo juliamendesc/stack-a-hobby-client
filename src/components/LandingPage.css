@@ -1,105 +1,11 @@
-.landing-jumbotron {
-    height: 550px;
-}
-.landing-image {
-    margin-top: 30px;
-    /* width: 60%;
-    height: 60%; */
-    /* float: right; */
+.btn {
+    margin: 0 5px;
 }
 
-/* .jumbotron-text { */
-    /* width: 40%; */
-    /* float: left; */
-/* } */
-
-.jumbotron-h1 {
-    /* margin-left: 100px;
-    margin-bottom: 20px; */
-    font-size: 4em;
+.jumbotron-text {
     text-align: left;
 }
 
-.jumbotron-p {
-    /* margin-left: 100px;
-    padding-bottom: 10px; */
-    font-size: 1.25em;
-    text-align: left;
-}
-
-.jumbotron-button-link {
-    padding: 10px;
-}
-
-.second-jumbotron {
-    margin-top: -50px;
-    /* height: 350px; */
-    background-color: white;
-}
-
-.second-h1 {
-    font-size: 2em;
-}
-
-.second-p {
-    font-size: 1.25em;
-    margin: 30px 250px;
-}
-
-.third-p {
-    font-size: 1.25em;
-    margin: 30px auto;
-}
-
-.cardgroup-1 {
-    margin: 10px 150px;
-}
-
-.card-image {
-    width: 100px;
-    height: 160px;
-}
-
-.card-text {
-    font-size: 0.8em;
-    margin-top: 60px;
-    text-align: left;
-}
-
-.cardDeck-2 {
-    margin: 10px 150px;
-}
-
-.card-deck-image {
-    height: 250px;
-}
-
-.squares {
-    margin: 0 50px;
-}
-
-.landing-buttons-footer {
-    margin-right: 60px;
-    float: right;
-}
-
-.lower-container {
-    height: 60px;
-}
-
-.jumbotron-lower-text {
-    float: left;
-}
-
-.lower-h3 {
-    margin-left: 125px;
-}
-.lower-p {
-    margin-left: 125px;
+.lead-text {
     font-size: 1.5em;
-    text-align: left;
-}
-
-.jumbotron-button {
-    width: 150px;
 }

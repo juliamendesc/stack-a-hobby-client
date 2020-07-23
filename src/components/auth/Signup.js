@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { ToastContainer, toast } from 'react-toastify';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+import axios from "axios";
 
 class Signup extends Component {
   state = {
@@ -14,38 +18,59 @@ class Signup extends Component {
     dateOfBirth: "",
     firstName: "",
     lastName: "",
-    isTeacher:"",
-   };
+    isTeacher: "",
+  };
   service = new AuthService();
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { username, password, email, dateOfBirth, firstName, lastName, file, isTeacher, dropDownValue } = this.state;
+    const {
+      username,
+      password,
+      email,
+      dateOfBirth,
+      firstName,
+      lastName,
+      file,
+      isTeacher,
+      dropDownValue,
+    } = this.state;
     // const isTeacher = false;
     const uploadData = new FormData();
     uploadData.append("imageUrl", file);
-    axios.post('https://stack-a-hobby.herokuapp.com/api/upload', uploadData)
-        .then((response) => {
-           this.service
-            .signup(username, password, email, dateOfBirth, firstName, lastName, response.data.imageUrl, isTeacher, dropDownValue)
-            .then((response) => {
-              this.setState({
-                username: "",
-                password: "",
-                email: "",
-                dateOfBirth: "",
-                firstName: "",
-                lastName: "",
-                isTeacher:"",
-                dropDownValue:"",
-              });
-              this.props.setCurrentUser(response);
-              this.props.history.push("/courses")
-           })
-           .catch(error =>{
-             toast(`${error}`)
-           })  
-    })
+    axios
+      .post("https://stack-a-hobby.herokuapp.com/api/upload", uploadData)
+      .then((response) => {
+        this.service
+          .signup(
+            username,
+            password,
+            email,
+            dateOfBirth,
+            firstName,
+            lastName,
+            response.data.imageUrl,
+            isTeacher,
+            dropDownValue
+          )
+          .then((response) => {
+            this.setState({
+              username: "",
+              password: "",
+              email: "",
+              dateOfBirth: "",
+              firstName: "",
+              lastName: "",
+              isTeacher: "",
+              dropDownValue: "",
+            });
+            this.props.setCurrentUser(response);
+            this.props.history.push("/courses");
+          })
+          .catch((error) => {
+            toast(`${error}`);
+          });
+      });
   };
 
   handleChange = (event) => {
@@ -53,9 +78,9 @@ class Signup extends Component {
     this.setState({ [name]: value });
   };
 
-// //Upload photos Change - Axios as well - HUGO
+  // //Upload photos Change - Axios as well - HUGO
   handleFileChange = (event) => {
-    this.setState({ file: event.target.files[0]});
+    this.setState({ file: event.target.files[0] });
   };
 
   handleSubmit = (event) => {
@@ -63,97 +88,93 @@ class Signup extends Component {
   };
 
   handleChangeValue(e) {
-    this.setState({dropDownValue: e.currentTarget.textContent})
+    this.setState({ dropDownValue: e.currentTarget.textContent });
   }
 
   render() {
     return (
-      <div>
-        <Form onSubmit={this.handleFormSubmit}>
-          <Row form>
-            <Col  sm={6} md={{ size: 3, offset: 3 }}>
-              <FormGroup>
-              <Label>Username:</Label>
-                <Input
-                  type="text"
-                  name="username"
-                  value={this.state.username}
-                  placeholder ="Username"
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col sm={6} md={{ size: 3, offset: -1 }}>
-              <FormGroup>
-              <Label>Password:</Label>
-                <Input
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  placeholder='Password'
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <FormGroup>
-                <Label>Email:</Label>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="your.email@stack-a-hobby.com"
-                    value={this.state.email}
-                    onChange={this.handleChange}
-                  />
-                </FormGroup>
-            </Col>
-          </Row>
+      <div className="container">
+        <form onSubmit={this.handleFormSubmit}>
+          <div className="row">
+            <div className="form-group col-sm-6 col-md-3 offset-md-3">
+              <label>Username:</label>
+              <input
+                type="text"
+                name="username"
+                className="form-control"
+                value={this.state.username}
+                placeholder="Username"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="col-sm-6 col-md-3">
+              <label>Password:</label>
+              <input
+                name="password"
+                type="password"
+                className="form-control"
+                value={this.state.password}
+                placeholder="Password"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-sm-12 col-md-6 offset-md-3">
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                placeholder="your.email@stack-a-hobby.com"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-sm-12 col-md-6 offset-md-3">
+              <label>Date of Birth:</label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                className="form-control"
+                value={this.state.dateOfBirth}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-sm-12 col-md-6 offset-md-3">
+              <label>First Name:</label>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="John"
+                className="form-control"
+                value={this.state.firstName}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-sm-12 col-md-6 offset-md-3">
+              <label>Last Name:</label>
+              <input
+                type="text"
+                name="lastName"
+                className="form-control"
+                placeholder="Doe"
+                value={this.state.lastName}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
 
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-              <Label>Date of Birth:</Label>
-                <Input
-                  type="date"
-                  name="dateOfBirth"
-                  value={this.state.dateOfBirth}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-              <Label>First Name:</Label>
-                <Input
-                  type="text"
-                  name="firstName"
-                  placeholder="John"
-                  value={this.state.firstName}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-              <Label>Last Name:</Label>
-                <Input
-                  type="text"
-                  name="lastName"
-                  placeholder="Doe"
-                  value={this.state.lastName}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-
-          <Dropdown direction="right" isOpen={this.state.btnDropleft} toggle={() => { this.setState({ btnDropleft: !this.state.btnDropleft}); }}>
+          {/* <Dropdown direction="right" isOpen={this.state.btnDropleft} toggle={() => { this.setState({ btnDropleft: !this.state.btnDropleft}); }}>
         <DropdownToggle caret>
         Type of Profile {this.state.dropDownValue} 
       </DropdownToggle>
@@ -161,25 +182,29 @@ class Signup extends Component {
         <DropdownItem><div onClick={this.handleChangeValue}>Teacher</div></DropdownItem>
         <DropdownItem><div onClick={this.handleChangeValue}>Student</div></DropdownItem>
       </DropdownMenu>
-    </Dropdown>
+    </Dropdown> */}
 
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-              <Label>Profile Image</Label>
-                <Col sm="12" md={{ size: 6, offset: 3 }}>
-                  <Input type="file" onChange={this.handleFileChange}  /> 
-                </Col>
-              </FormGroup>
-            </Col>
-          </Row>
-          
-          <Button color="primary" type="submit" value="Signup" >Signup</Button>
-        </Form>
-        <p>
-          Already have account?
-          <Link to={"/login"}> Login</Link>
-        </p>
+          <div className="row">
+            <div className="form-group col-sm-12 col-md-6 offset-md-3">
+              <label>Profile Image</label>
+              <input
+                type="file"
+                className="form-control-file"
+                onChange={this.handleFileChange}
+              />
+            </div>
+          </div>
+
+          <button type="submit" className="btn btn-info" value="Signup">
+            Signup
+          </button>
+        </form>
+        <div className="form-group col-sm-12 col-md-6 offset-md-3">
+          <p>
+            Already have account?
+            <Link to={"/login"}> Login</Link>
+          </p>
+        </div>
         <ToastContainer />
       </div>
     );

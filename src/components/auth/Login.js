@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 
 class Login extends Component {
@@ -32,52 +31,49 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login-form">
-        <Form onSubmit={this.handleFormSubmit} style={{width:"80%", margin:"10px auto"}}>
-          <Row form >
-            <Col
-              style={{ width: "80%", margin: "10px auto" }}
-              sm={6}
-              md={{ size: 3, offset: 4 }}
-            >
-              <FormGroup>
-                <Label>Username:</Label>
-                <Input
+<div className="container">
+        <form onSubmit={this.handleFormSubmit}>
+          <div className="row">
+            <div className="form-group col-sm-6 col-md-3 offset-md-4">
+                <label>Username:</label>
+                <input
                   type="text"
                   name="username"
+                  className="form-control"
                   placeholder="Your Username"
                   value={this.state.username}
                   onChange={this.handleChange}
                 />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col
-              style={{ width: "80%", margin: "10px auto" }}
-              sm={6}
-              md={{ size: 3, offset: 4 }}
-            >
-              <FormGroup>
-                <Label>Password:</Label>
-                <Input
-                  name="password"
-                  placeholder="Your Password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Button color="primary" type="submit" value="Login">
-            Login{" "}
-          </Button>
-        </Form>
-        <p>
-          Don't have account?
-          <Link to={"/signup"}> Signup</Link>
-        </p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-sm-6 col-md-3 offset-md-4">
+                  <label>Password:</label>
+                  <input
+                    type ="password"
+                    name="password"
+                    className="form-control"
+                    placeholder="Your Password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
+            </div>
+          </div>
+          <div className="form-group col-sm-6 col-md-3 offset-md-4">
+            <button
+              type="submit"
+              className="btn btn-info"
+              value="users-edit">
+              Login
+            </button>
+          </div>
+        </form>
+        <div className="form-group col-sm-6 col-md-3 offset-md-4">
+          <p>
+            Don't have account?
+            <Link to={"/signup"}> Signup</Link>
+          </p>
+        </div>
         <ToastContainer />
       </div>
     );

@@ -1,7 +1,5 @@
-.avatar {
-    margin: 10px;
-    width: 171px;
-    height: 180px;
+.img-thumbnail {
+    max-height: 230px;
 }
 
 .container {

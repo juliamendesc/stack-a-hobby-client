@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./courses/CoursesLists.css";
 
 class Search extends Component {
@@ -14,16 +15,32 @@ class Search extends Component {
     }
 
     render() {
+        const isTeacher = this.props.loggedInUser && this.props.loggedInUser.isTeacher;
         return (
-          <div className="search-bar">
+            <nav className="navbar navbar-light bg-light search-bar">
+            <form className="form-inline">
             <input
-              type="text"
-              className="input mr-sm-2"
+              type="search"
+              className="form-control mr-sm-2"
               onChange={this.handleSearch}
               placeholder="Search by title"
+              aria-label="Search"
               value={this.state.input}
             />
-          </div>
+            </form>
+        {isTeacher && (
+          <Link
+            to={{
+              pathname: `/courses/add-course`,
+            }}
+          >
+            <button type="button" 
+            className="btn btn-outline-success">
+            Add Your Course
+            </button>
+          </Link>
+           )}
+            </nav>
         );
       }
 }

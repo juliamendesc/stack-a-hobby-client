@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Col, Row, Form, FormGroup, Label, Input } from "reactstrap";
 
 class AddCourse extends Component {
   state = {
@@ -10,6 +9,7 @@ class AddCourse extends Component {
     category: "",
     imageURL: "",
     author: "",
+    username: "",
   };
 
   handleChange = (event) => {
@@ -20,16 +20,21 @@ class AddCourse extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const { title, description, videoURL, category, imageURL } = this.state;
-    const author = this.props.loggedInUser.username;
+    const { author, username } = this.props.loggedInUser;
     axios
-      .post(`https://stack-a-hobby.herokuapp.com/api/courses/`, {
-        title,
-        description,
-        videoURL,
-        category,
-        imageURL,
-        author
-      })
+      .post(
+        `https://stack-a-hobby.herokuapp.com/api/courses`,
+        {
+          title,
+          description,
+          videoURL,
+          category,
+          imageURL,
+          author,
+          username,
+        },
+        { withCredentials: true }
+      )
       .then(() => {
         this.props.history.push("/courses");
       });
@@ -37,76 +42,85 @@ class AddCourse extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Add Your Course</h3>
-        <Form onSubmit={this.handleFormSubmit}>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Title</Label>
-                <Input
-                  type="text"
-                  name="title"
-                  value={this.state.title}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Description</Label>
-                <Input
-                  type="text"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Video URL</Label>
-                <Input
-                  type="text"
-                  name="videoURL"
-                  value={this.state.videoURL}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Image URL</Label>
-                <Input
-                  type="text"
-                  name="imageURL"
-                  value={this.state.imageURL}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Category</Label>
-                <Input
-                  type="text"
-                  name="category"
-                  value={this.state.category}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <input type="submit" value="submit" />
-        </Form>
+      <div className="container">
+        <h3 className="display-5">Add Your Course</h3>
+        <form onSubmit={this.handleFormSubmit}>
+          <div className="form-group col-12 col-md-6 offset-md-3">
+            <label>Course Title</label>
+            <input
+              type="text"
+              className="form-control"
+              id="courseTitle"
+              name="title"
+              placeholder="Your course title"
+              value={this.state.title}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+          <div className="form-group col-12 col-md-6 offset-md-3">
+            <label>Description</label>
+            <textarea
+              type="text"
+              className="form-control"
+              id="courseDescription"
+              name="description"
+              placeholder="Describe your course"
+              value={this.state.description}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+            <div className="form-group col-12 col-md-6 offset-md-3">
+              <label>Video ID</label>
+              <input
+                type="text"
+                className="form-control"
+                id="courseVideoURL"
+                name="videoURL"
+                placeholder="Your youtube video identification number"
+                value={`https://www.youtube.com/embed/${this.state.videoURL}`}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="form-group col-12 col-md-6 offset-md-3">
+              <label>Thumbnail</label>
+              <input
+                type="text"
+                className="form-control"
+                id="courseDescription"
+                name="imageURL"
+                placeholder="Link to your course thumbnail"
+                value={this.state.imageURL}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="form-group col-12 col-md-6 offset-md-3">
+              <label>Category</label>
+              <select
+                className="custom-select"
+                id="courseCategory"
+                name="category"
+                value={this.state.category}
+                onChange={this.handleChange}
+                required
+              >
+                <option value="">
+                  Choose one
+                </option>
+                <option>Arts & Crafts</option>
+                <option>DIY</option>
+                <option>Foods & Drinks</option>
+                <option>Education</option>
+                <option>Music & Video</option>
+                <option>Sports</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button type="submit" className="btn btn-outline-info" value="submit">Submit</button>
+          </form>
       </div>
     );
   }

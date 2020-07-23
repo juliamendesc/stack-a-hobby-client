@@ -1,14 +1,7 @@
-.about-card {
-    width: 80%;
-    margin: 10px auto;
+.jumbotron {
+    margin-top: -30px;
 }
 
-.about-card-body {
-    font-size: 1.1rem;
-    text-align:left;
-}
-
-.about-jumbotron {
-    margin-top: -50px;
-    height: 600px;
+.card-text {
+    text-align: left;
 }

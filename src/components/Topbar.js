@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AuthService from "./auth/auth-service";
-import { Navbar, Nav, Form, Button } from "react-bootstrap";
 
 class Topbar extends Component {
   service = new AuthService();
@@ -15,74 +14,124 @@ class Topbar extends Component {
   render() {
     if (this.props.loggedInUser) {
       return (
-        <div>
-          <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Navbar.Brand href="/">
-                <img
-                  src="https://res.cloudinary.com/jmc10/image/upload/v1594927766/myFolder/logo_roboto_mjlb8q.png"
-                  alt="logo"
-                />
-              </Navbar.Brand>
-              <Nav className="mr-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/courses">Courses</Nav.Link>
-                <Form inline>
-                  {/* <FormControl
-                    type="text"
-                    placeholder="Search"
-                    className="mr-sm-2"
-                  />
-                  <Button variant="outline-info">Search</Button> */}
-                  
-                </Form>
-              </Nav>
-              <Nav className="justify-content-end">
-                <Nav.Link href="/user-details">
-                  Welcome {this.props.loggedInUser.firstName}{" "}
-                  {this.props.loggedInUser.lastName}
-                </Nav.Link>
-                <Nav.Link href="/" onClick={() => this.logoutUser()}>Logout</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-        </div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="/">
+            <img
+              className="img-fluid"
+              src="https://res.cloudinary.com/jmc10/image/upload/v1594927766/myFolder/logo_roboto_mjlb8q.png"
+              alt="Responsive image"
+            />
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li className="nav-item active">
+                <a className="nav-link" href="/">
+                  Home <span className="sr-only">(current)</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/about">
+                  About
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/courses">
+                  Courses
+                </a>
+              </li>
+            </ul>
+            <span className="navbar-text">
+              <a className="nav-link" href="/user-details">
+                Welcome {this.props.loggedInUser.firstName}{" "}
+                {this.props.loggedInUser.lastName}
+              </a>
+            </span>
+            <span className="navbar-text">
+              <a
+                className="nav-link"
+                href="/"
+                onClick={() => this.logoutUser()}
+              >
+                Logout
+              </a>
+            </span>
+          </div>
+        </nav>
       );
     } else {
       return (
-        <div>
-          <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Navbar.Brand href="/">
-                <img
-                  src="https://res.cloudinary.com/jmc10/image/upload/v1594927766/myFolder/logo_roboto_mjlb8q.png"
-                  alt="logo"
-                />
-              </Navbar.Brand>
-              <Nav className="mr-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/courses">Courses</Nav.Link>
-              </Nav>
-              <Nav className="justify-content-end">
-                <Nav.Link href="/login">
-                  {" "}
-                  <Button variant="light">Login</Button>
-                </Nav.Link>
-                <Nav.Link href='/login-google'>
-                {" "}
-                <Button variant="light">Login using Google</Button> 
-                  </Nav.Link>
-                <Nav.Link href="/signup">
-                  <Button variant="dark">Signup</Button>
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-        </div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="/">
+            <img
+              className="img-fluid"
+              src="https://res.cloudinary.com/jmc10/image/upload/v1594927766/myFolder/logo_roboto_mjlb8q.png"
+              alt="Responsive image"
+            />
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li className="nav-item active">
+                <a className="nav-link" href="/">
+                  Home <span className="sr-only">(current)</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/about">
+                  About
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/courses">
+                  Courses
+                </a>
+              </li>
+            </ul>
+            <span className="navbar-text">
+              <a href="/login">
+                <button type="button" className="btn btn-outline-secondary">
+                  Login
+                </button>
+              </a>
+            </span>
+            <span className="navbar-text">
+              <a href="/login-google">
+                <button type="button" className="btn btn-outline-secondary">
+                  Login using Google
+                </button>
+              </a>
+            </span>
+            <span className="navbar-text">
+              <a href="/signup">
+                <button type="button" className="btn btn-dark">
+                  Signup
+                </button>
+              </a>
+            </span>
+          </div>
+        </nav>
       );
     }
   }

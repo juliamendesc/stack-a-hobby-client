@@ -1,46 +1,54 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Form, Label, Input, Container } from 'reactstrap';
 
 class AddComment extends Component {
-    state= {
-        content: ""
-    };
+  state = {
+    content: "",
+  };
 
-    handleChange = (event) => {  
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-    }
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        const { params } = this.props.match;
-        const { content } = this.state;
-        axios.post(`https://stack-a-hobby.herokuapp.com/api/courses/${params.id}/comments`, { content }, { withCredentials: true })
-            .then(() => {
-              this.props.getSingleCourse();
-              this.setState({ content: ''});
-            })
-    }  
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { params } = this.props.match;
+    const { content } = this.state;
+    axios
+      .post(
+        `https://stack-a-hobby.herokuapp.com/api/courses/${params.id}/comments`,
+        { content },
+        { withCredentials: true }
+      )
+      .then(() => {
+        this.props.getSingleCourse();
+        this.setState({ content: "" });
+      });
+  };
 
-    render() {
-      return (
-          <Container>
-            <h3>Comment this course</h3>
-            <Form onSubmit={this.handleSubmit}>
-              <Label>Your Comment</Label>
-              <Input
-                type="text"
-                name="content"
-                value={this.state.content}
-                onChange={this.handleChange}
-                required
-              />
-              <Input type="submit" value="submit" />
-            </Form>
-        </Container>
-      )   
-    }
+  render() {
+    return (
+      <div className="container">
+      <h4>Comment this course</h4>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <textarea
+              type="text"
+              name="content"
+              className="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              value={this.state.content}
+              onChange={this.handleChange}
+              required
+            ></textarea>
+          </div>
+          <button type="submit" className="btn btn-light">Submit Comment</button>
+        </form>
+        </div>
+    );
+  }
 }
 
 export default AddComment;

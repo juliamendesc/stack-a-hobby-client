@@ -1,14 +1,5 @@
 .search-bar {
-    float: left;
-    margin-top: -35px;
-    margin-left: 10px;
-}
-
-.courses-jumbotron {
-    margin-top: -20px;
-}
-.course-container {
-    margin: 10px 450px;
+    margin-top: -10px;
 }
 
 .add-course {

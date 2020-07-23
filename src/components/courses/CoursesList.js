@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Jumbotron, Card, CardImg, CardText, CardBody, CardTitle, CardFooter, Row, Col} from 'reactstrap';
-import Search from '../Search';
+import Search from "../Search";
 import "./CoursesLists.css";
-import 'bootstrap/dist/css/bootstrap.css';
 
 class CoursesList extends Component {
   state = {
     listOfCourses: [],
-    filtered:[],
+    filtered: [],
   };
 
   getAllCourses = () => {
@@ -18,8 +16,8 @@ class CoursesList extends Component {
       .then((responseFromAPI) => {
         this.setState({
           listOfCourses: responseFromAPI.data,
-          filtered: responseFromAPI.data
-        })
+          filtered: responseFromAPI.data,
+        });
       });
   };
   componentDidMount() {
@@ -27,61 +25,52 @@ class CoursesList extends Component {
   }
 
   filterCoursesHandler = (input) => {
-    const filtered = this.state.listOfCourses.filter(el => {
+    const filtered = this.state.listOfCourses.filter((el) => {
       return el.title.toLowerCase().includes(input.toLowerCase());
     });
-    this.setState({ filtered: filtered});  
-  }
+    this.setState({ filtered: filtered });
+  };
 
   render() {
-    const isTeacher = this.props.loggedInUser && this.props.loggedInUser.isTeacher;
     return (
       <div>
-      <Jumbotron responsive="lg" fluid className="courses-jumbotron">
-      <Search filterCourses={this.filterCoursesHandler}/>
-      <div className="add-course">
-        {isTeacher && (
-          <Link
-            to={{
-              pathname: `/courses/add-course`,
-            }}
-          >
-            Add Your Course
-          </Link>
-           )}
+        <Search
+          filterCourses={this.filterCoursesHandler}
+          loggedInUser={this.props.loggedInUser}
+        />
+        <div className="container-fluid">
+          <div className="row justify-content-center">
+            <div className="card-deck col">
+            <div className="row no-gutters">
+              {this.state.filtered.map((course) => {
+                const courseImage = course.imageURL;
+                return (
+                  <div className="container col-sm-4" key={course._id}>
+                    <div className="card bg-light">
+                      <img
+                        className="card-img-top"
+                        src={courseImage}
+                        alt="Card course image cap-1"
+                      />
+                      <div className="card-body">
+                        <Link to={`/courses/${course._id}`}>
+                          <h5 className="card-title">{course.title}</h5>
+                        </Link>
+                        <p className="card-text text-left">{course.description}</p>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">
+                          <b>Category:</b> {course.category}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              </div>
+            </div>
+          </div>
         </div>
-      <Row xs="1" sm="2" md="4">
-           {this.state.filtered.map((course) => {
-            const courseImage = course.imageURL;
-            return (
-              <Col sm={{ size: 3}}>
-              <Card key={course._id}>
-                <CardImg 
-                top width="100%" src={courseImage}/>
-                <CardBody>
-                  <Link to={`/courses/${course._id}`}>
-                    <CardTitle>
-                      {course.title}
-                    </CardTitle>
-                  </Link>
-                  <CardText>
-                    {course.description}
-                  </CardText>
-                </CardBody>
-                <CardFooter>
-                  <small className="text-muted">
-                    <b>Category:</b> {course.category}
-                  </small>
-                </CardFooter>
-              </Card>
-              </Col>
-            );
-          })}
-        </Row>
-        {/* // <div style={{ width: "40%", float: "right" }}> */}
-        {/* <AddCourse refreshProjects={this.getAllProjects} /> */}
-        {/* </div> */}
-      </Jumbotron>
       </div>
     );
   }

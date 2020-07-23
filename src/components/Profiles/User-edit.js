@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AuthService from "../auth/auth-service";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { ToastContainer } from "react-toastify";
 
 class UserEdit extends Component {
@@ -11,12 +10,12 @@ class UserEdit extends Component {
     firstName: "",
     lastName: "",
     imageUrl: "",
-    file: ""
+    file: "",
   };
   service = new AuthService();
 
   handleFileChange = (event) => {
-    this.setState({ file: event.target.files[0]});
+    this.setState({ file: event.target.files[0] });
   };
 
   handleChange = (event) => {
@@ -32,7 +31,7 @@ class UserEdit extends Component {
       dateOfBirth,
       firstName,
       lastName,
-    //   file,
+      //   file,
     } = this.state;
     // const { params } = this.props.match;
     axios
@@ -50,74 +49,72 @@ class UserEdit extends Component {
   render() {
     const loggedInUser = this.props.loggedInUser;
     return (
-      <div>
-        <Form onSubmit={this.handleFormSubmit}>
- 
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Email</Label>
-                <Input
-                  
-                  type="email"
-                  placeholder={loggedInUser && loggedInUser.email}
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                  required
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Date of Birth</Label>
-                <Input
-                  type="date"
-                  name="dateOfBirth"
-                  value={this.state.dateOfBirth}
-                  onChange={this.handleChange}
-                  required
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>First Name</Label>
-                <Input
-                  type="text"
-                  name="firstName"
-                  placeholder="John"
-                  value={this.state.firstName}
-                  onChange={this.handleChange}
-                  required
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row form>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <FormGroup>
-                <Label>Last Name</Label>
-                <Input
-                  type="text"
-                  name="lastName"
-                  placeholder="Doe"
-                  value={this.state.lastName}
-                  onChange={this.handleChange}
-                  required
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-
-          <Button color="primary" type="submit" value="users-edit">
+      <div className="container">
+        <h3 className="display-5">Edit your details</h3>
+        <form onSubmit={this.handleFormSubmit}>
+          <div className="row">
+            <div className="form-group col-12 col-md-6 offset-md-3">
+              <label>Email</label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder={loggedInUser && loggedInUser.email}
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-12 col-md-6 offset-md-3">
+              <label>Date of Birth</label>
+              <input
+                type="date"
+                className="form-control"
+                name="dateOfBirth"
+                value={this.state.dateOfBirth}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-12 col-md-6 offset-md-3">
+              <label>First Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="firstName"
+                placeholder={loggedInUser && loggedInUser.firstName}
+                value={this.state.firstName}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-12 col-md-6 offset-md-3">
+              <label>Last Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="lastName"
+                placeholder={loggedInUser && loggedInUser.lastName}
+                value={this.state.lastName}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="btn btn-outline-info"
+            value="users-edit"
+          >
             Update
-          </Button>
-        </Form>
+          </button>
+        </form>
         <ToastContainer />
       </div>
     );

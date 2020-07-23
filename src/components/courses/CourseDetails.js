@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import AddComment from "./AddComment";
-import { Table } from "reactstrap";
-import moment from "moment";
+import Comments from "./Comments";
+import TeacherButtons from "./TeacherButtons";
+import AuthService from "../auth/auth-service";
 import "./CourseDetails.css";
 
 class CourseDetails extends Component {
   state = {};
+  service = new AuthService();
 
   getSingleCourse = () => {
     const { params } = this.props.match;
@@ -18,7 +19,9 @@ class CourseDetails extends Component {
         const course = responseFromAPI.data;
         this.setState(course);
       });
+      console.log("get single course after state", this.course)
   };
+
   deleteCourse = () => {
     const { params } = this.props.match;
     axios
@@ -30,84 +33,64 @@ class CourseDetails extends Component {
         console.log(err);
       });
   };
+  
   componentDidMount() {
-    this.getSingleCourse();
+    this.service.loggedin().then((response) => {
+      this.setState({ loggedInUser: response });
+      this.getSingleCourse();
+    });
   }
 
   render() {
-    const { params } = this.props.match;
-    const isTeacher = this.props.loggedInUser.isTeacher;
+    const isAuthor = this.state.loggedInUser && this.state.loggedInUser._id === this.state.author;
+    // const reviewed = this.state.loggedInUser && this.state.loggedInUser._id === this.state.course.comment.user;
     return (
-      <div>
+      <div className="container">
         <div>
-          <div>
-            <h1>{this.state.title}</h1>
-            <div>
-              {this.state.description}
-              <ReactPlayer className="course-video" url={this.state.videoURL} />
-            </div>
-            {isTeacher && (
-              <div>
-                <button onClick={() => this.deleteCourse()}>
-                  Delete course
-                </button>
+          <h1 className="display-5">{this.state.title}</h1>
+          <p className="lead lead-text">{this.state.description}</p>
+          <p>Posted by: <b>{this.state.username}</b></p>
+          <hr className="my-4" />
+        </div>
+        <div className="media row no-gutters">
+          <div className="col-12 col-sm-6 col-lg-8 embed-responsive embed-responsive-16by9 align-self-center mr-3">
+            {/* <ReactPlayer
+              className="embed-responsive-item"
+              url={this.state.videoURL}
+            /> */}
+              <iframe className="embed-responsive-item" src={`https://www.youtube.com/embed/${this.state.videoURL}`} allowFullScreen></iframe>
+          </div>
+          <div className="media-body col-6 col-sm-4 justify-content-center">
+            <AddComment
+              {...this.props}
+              getSingleCourse={this.getSingleCourse}
+              loggedInUser
+              params
+            />
+            <hr className="my-4" />
+
+            {isAuthor && (
+              <div className="row no-gutters justify-content-center">
+                <div className="col-12 col-sm-6 col-md-8">
+                <h4>Manage your course</h4>
+                <TeacherButtons
+                  {...this.props}
+                  deleteCourse={this.deleteCourse}
+                  params
+                  state={this.state}
+                  isAuthor
+                />
+                </div>
               </div>
             )}
           </div>
         </div>
 
+        <hr className="my-4" />
+
         <div>
-        {isTeacher && (
-          <Link
-            to={{
-              pathname: `/courses/${params.id}/edit`,
-              state: {
-                title: this.state.title,
-                description: this.state.description,
-              },
-            }}
-          >
-            Edit Course
-          </Link>
-           )}
+          <Comments comments={this.state.comments} course={this.state.course} />
         </div>
-        <hr />
-        <div>
-          <Table responsive>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Reviewer</th>
-                <th>Comment</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.comments &&
-                this.state.comments.map((comment) => {
-                  return (
-                    <tr key={comment._id}>
-                      <th scope="row">1</th>
-                      <td>{comment.username}</td>
-                      <td>{comment.content}</td>
-                      <td>
-                        {moment(comment.createdAt, [
-                          "YYYY-MM-DD",
-                          "DD-MM-YYYY",
-                        ]).format("DD MMMM YYYY")}
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </Table>
-        </div>
-        <hr />
-        {this.props.loggedInUser && (
-          <div>
-            <AddComment {...this.props} getSingleCourse={this.getSingleCourse} loggedInUser params />
-          </div>
-        )}
       </div>
     );
   }
