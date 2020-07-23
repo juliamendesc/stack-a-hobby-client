@@ -54,8 +54,7 @@ class Topbar extends Component {
             </ul>
             <span className="navbar-text">
               <a className="nav-link" href="/user-details">
-              Welcome {this.props.loggedInUser.firstName}
-                {this.props.loggedInUser.lastName} (My account)
+              Welcome {this.props.loggedInUser.firstName} {this.props.loggedInUser.lastName} (My account)
               </a>
             </span>
             <span className="navbar-text">
