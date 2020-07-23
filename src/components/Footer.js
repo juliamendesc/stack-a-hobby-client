@@ -5,7 +5,7 @@ function FooterPage(props) {
     <nav className="navbar navbar-light bg-light sticky-bottom">
       <span className="navbar-text">
         &copy; {new Date().getFullYear()} Copyright: Developed by Hugo Rodrigues
-        and Julia Carvalho
+        and Julia Carvalho. Logo by João Baffa.
       </span>
       <a className="navbar-brand" href="/">
         <img

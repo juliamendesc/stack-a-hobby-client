@@ -21,13 +21,13 @@ class UserDetails extends Component {
         this.setState({
           listOfCourses: responseFromAPI.data,
           filteredCourses: responseFromAPI.data,
-        })
-      })
+        });
+      });
   };
 
   componentDidMount() {
     this.service.loggedin().then((response) => {
-      this.setState({ loggedInUser: response});
+      this.setState({ loggedInUser: response });
       this.getAllCourses();
       // this.filterCoursesHandler();
     });
@@ -35,17 +35,19 @@ class UserDetails extends Component {
 
   render() {
     const loggedInUser = this.state.loggedInUser;
-    const isTeacher = this.state.loggedInUser && this.state.loggedInUser.isTeacher;
+    const isTeacher =
+      this.state.loggedInUser && this.state.loggedInUser.isTeacher;
 
     // const commentReviewer = this.props.courses.comments.user;
     return (
       <div className="container">
         <div className="row">
           <div className="col.sm.7 col-md-6">
-            <img src={loggedInUser && loggedInUser.imageUrl} 
-            alt="Responsive image"
-            className="img-fluid rounded-circle img-thumbnail"
-           />
+            <img
+              src={loggedInUser && loggedInUser.imageUrl}
+              alt="Responsive image"
+              className="img-fluid rounded-circle img-thumbnail"
+            />
           </div>
           <div className="col.sm.7 col-md-6">
             <table className="table table-responsive table-hover text-left">
@@ -70,27 +72,28 @@ class UserDetails extends Component {
                   <th scope="row">Date of Birth:</th>
                   <td>
                     {loggedInUser &&
-                    moment.parseZone(loggedInUser.dateOfBirth).local().format("DD MMMM YYYY")}
+                      moment
+                        .parseZone(loggedInUser.dateOfBirth)
+                        .local()
+                        .format("DD MMMM YYYY")}
                   </td>
                 </tr>
               </tbody>
             </table>
             <div className="col.sm.7 col-md-6">
               <Link to="/users-edit/">
-                <button type="submit" className="btn btn-outline-secondary">Edit Profile</button>
+                <button type="submit" className="btn btn-outline-secondary">
+                  Edit Profile
+                </button>
               </Link>
-              </div>
+            </div>
           </div>
         </div>
         {isTeacher && (
-        <TeacherCourses 
-          {...this.props}
-          state={this.state}
-          params
-        />
-      )}
+          <TeacherCourses {...this.props} state={this.state} params />
+        )}
       </div>
-      
+
       // <div>My Courses</div>
       // <div>
       //   My Comments

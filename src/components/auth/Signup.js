@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
 import axios from "axios";
 
 class Signup extends Component {
@@ -173,17 +167,6 @@ class Signup extends Component {
               />
             </div>
           </div>
-
-          {/* <Dropdown direction="right" isOpen={this.state.btnDropleft} toggle={() => { this.setState({ btnDropleft: !this.state.btnDropleft}); }}>
-        <DropdownToggle caret>
-        Type of Profile {this.state.dropDownValue} 
-      </DropdownToggle>
-      <DropdownMenu>
-        <DropdownItem><div onClick={this.handleChangeValue}>Teacher</div></DropdownItem>
-        <DropdownItem><div onClick={this.handleChangeValue}>Student</div></DropdownItem>
-      </DropdownMenu>
-    </Dropdown> */}
-
           <div className="row">
             <div className="form-group col-sm-12 col-md-6 offset-md-3">
               <label>Profile Image</label>
@@ -194,7 +177,6 @@ class Signup extends Component {
               />
             </div>
           </div>
-
           <button type="submit" className="btn btn-info" value="Signup">
             Signup
           </button>
