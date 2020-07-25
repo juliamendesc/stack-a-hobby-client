@@ -62,16 +62,16 @@ class EditCourse extends Component {
             />
           </div>
           <div className="form-group col-12 col-md-6 offset-md-3">
-            <label>Video URL</label>
-            <input
-              type="text"
-              className="form-control"
-              id="courseVideoURL"
-              name="videoURL"
-              placeholder="Your youtube video identification number"
-              value={`https://www.youtube.com/embed/${this.state.videoURL}`}
-              onChange={this.handleChange}
-            />
+              <label>Video ID</label>
+              <input
+                type="text"
+                className="form-control"
+                id="courseVideoURL"
+                name="videoURL"
+                placeholder="Your youtube video identification number"
+                value={this.state.videoURL}
+                onChange={this.handleChange}
+              />
           </div>
           <div className="form-group col-12 col-md-6 offset-md-3">
             <label>Thumbnail</label>
