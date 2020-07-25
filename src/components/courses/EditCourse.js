@@ -69,7 +69,7 @@ class EditCourse extends Component {
               id="courseVideoURL"
               name="videoURL"
               placeholder="Your youtube video identification number"
-              value={this.state.videoURL}
+              value={`https://www.youtube.com/embed/${this.state.videoURL}`}
               onChange={this.handleChange}
             />
           </div>

@@ -81,7 +81,6 @@ class AddCourse extends Component {
                 placeholder="Your youtube video identification number"
                 value={`https://www.youtube.com/embed/${this.state.videoURL}`}
                 onChange={this.handleChange}
-                required
               />
             </div>
             <div className="form-group col-12 col-md-6 offset-md-3">
