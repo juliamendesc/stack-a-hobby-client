@@ -9,3 +9,8 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    commit-message:
+      # Prefix all commit messages with "npm"
+      prefix: "(chore):"
+      commit-message: "update performed by dependabot"
+
