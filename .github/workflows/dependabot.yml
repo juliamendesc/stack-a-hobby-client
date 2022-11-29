@@ -9,6 +9,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+      day: "sunday"
     commit-message:
       # Prefix all commit messages with "npm"
       prefix: "(chore)"
